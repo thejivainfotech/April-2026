@@ -1,0 +1,249 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+
+{%- style -%}
+ .loc-section-{{ section.id }} {
+    padding: 80px 20px;
+    background-color: {{ section.settings.section_bg }};
+    font-family: inherit;
+  }
+  .loc-header { text-align: center; margin-bottom: 50px; }
+  .loc-subtitle { color: #00A657; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.96px; }
+  .loc-title { font-size: 56px; color: #01203F; margin: 10px auto 20px; font-weight: 800; line-height: 62px; max-width: 560px; }
+  .loc-desc { color: #3A4554; max-width: 600px; margin: 0 auto; line-height: 27px; font-size: 16px; }
+
+  .loc-grid {
+    display: flex;
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+    justify-content: center;
+  }
+  .loc-card {
+    flex: 1;
+    background: #fff;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #D8DCE2;
+    position: relative;
+  }
+ .loc-card--featured {
+  border: 1px solid transparent;
+  border-radius: 30px;
+  background-image: linear-gradient(white, white), 
+                    linear-gradient(45deg, #00A657, #00AEEC, #DBE64C, #00A657);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  position: relative;
+  display: block;
+}
+
+  .loc-badge {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: linear-gradient(to right, #00A657, #00AEEC);
+  box-shadow: 0px 2px 8px 0px rgba(0, 166, 87, 0.3);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-size: 10px;
+  font-weight: bold;
+  text-transform: uppercase;
+  z-index: 2;
+  border: none;
+}
+
+  .loc-image-wrap {
+    height: 250px;
+    background: #d31212;
+    position: relative;
+    overflow: hidden;
+  }
+  .loc-image-wrap img { width: 100%; height: 100%; object-fit: cover; }
+
+  .loc-content { padding: 30px; flex-grow: 1; display: flex; flex-direction: column; }
+  .loc-card-label { color: #00A657; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.96px;}
+  .loc-card-title { font-size: 26px; color: #01203F; margin-top: 5px; margin-bottom: 0px; font-weight: 800; }
+  .loc-card-text { font-size: 16px; color: #3A4554; line-height: 24px; margin-bottom: 20px; }
+  
+  .loc-price-wrap { margin-bottom: 25px; display: flex; align-items: baseline; gap: 8px; }
+  .loc-price { font-size: 34px; font-weight: 800; color: #01203F; }
+  .loc-price-sub { font-size: 12px; color: #6A7585; }
+
+  .loc-features { list-style: none; padding: 0; margin: 0 0 20px 0; }
+  .loc-feature-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    font-size: 13px; 
+    color: #3A4554; 
+    margin-bottom: 12px; 
+  }
+  .loc-feature-item svg { width: 14px; height: 14px; color: #2ecc71; flex-shrink: 0; }
+
+  .loc-btn {
+    display: block;
+    text-align: center;
+    padding: 15px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.3s;
+  }
+  
+  .loc-btn-primary {
+  background: linear-gradient(to right, #00A657, #00AEEC);
+  box-shadow: 
+    inset 0px 1px 0px 0px rgba(255, 255, 255, 0.2), 
+    0px 2px 12px 0px rgba(0, 166, 87, 0.3);
+  color: #fff;
+  border: none;
+  padding: 10px 20px; 
+  border-radius: 8px;
+  font-weight: 400;
+  cursor: pointer;
+  display: inline-block;
+  text-align: center;
+  width: fit-content;
+  padding: 16px 38px;
+  border-radius: 60px;
+}
+  .loc-btn-secondary { background: #fff; color: #01203F; border: 1px solid #D8DCE2;
+  font-weight: 400;
+  width: fit-content;
+  padding: 16px 38px;
+  border-radius: 60px;
+  }
+
+  @media (max-width: 768px) {
+    .loc-grid { flex-direction: column; }
+    .loc-title { 
+      font-size: 32px;
+      line-height: 35px;
+    }
+    .loc-card-title {
+      font-size: 20px;
+    }
+    .loc-btn-primary {
+      width: 100%;
+    }
+    .loc-content {
+      padding: 20px;
+    }
+    .loc-btn-secondary {
+      width: 100%;
+    }
+  }
+{%- endstyle -%}
+
+<section class="loc-section-{{ section.id }}">
+  <div class="loc-header">
+    <p class="loc-subtitle">{{ section.settings.subtitle }}</p>
+    <h2 class="loc-title">{{ section.settings.title }}</h2>
+    <p class="loc-desc">{{ section.settings.description }}</p>
+  </div>
+
+  <div class="loc-grid">
+    {%- for block in section.blocks -%}
+      <div class="loc-card {% if block.settings.show_badge %}loc-card--featured{% endif %}" {{ block.shopify_attributes }}>
+        {% if block.settings.show_badge %}
+          <div class="loc-badge">{{ block.settings.badge_text }}</div>
+        {% endif %}
+
+        <div class="loc-image-wrap">
+          {% if block.settings.image != blank %}
+            {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
+          {% endif %}
+        </div>
+
+        <div class="loc-content">
+          <span class="loc-card-label">{{ block.settings.top_label }}</span>
+          <h3 class="loc-card-title">{{ block.settings.heading }}</h3>
+          <p class="loc-card-text">{{ block.settings.text }}</p>
+
+          <div class="loc-price-wrap">
+            <span class="loc-price">{{ block.settings.price }}</span>
+            <span class="loc-price-sub">{{ block.settings.price_subtext }}</span>
+          </div>
+
+          <ul class="loc-features">
+            {% if block.settings.feat_1 != blank %}
+              <li class="loc-feature-item">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M11.1381 0.471436L3.80477 7.80477L0.471436 4.47144" stroke="#00A657" stroke-width="1.33333"/>
+                </svg>
+                 {{ block.settings.feat_1 }}
+              </li>
+            {% endif %}
+            {% if block.settings.feat_2 != blank %}
+              <li class="loc-feature-item">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M11.1381 0.471436L3.80477 7.80477L0.471436 4.47144" stroke="#00A657" stroke-width="1.33333"/>
+                                </svg>
+                {{ block.settings.feat_2 }}
+              </li>
+            {% endif %}
+            {% if block.settings.feat_3 != blank %}
+              <li class="loc-feature-item">
+                <svg width="12" height="9" viewBox="0 0 12 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                  <path d="M11.1381 0.471436L3.80477 7.80477L0.471436 4.47144" stroke="#00A657" stroke-width="1.33333"/>
+                                </svg> {{ block.settings.feat_3 }}
+                </li>
+            {% endif %}
+          </ul>
+
+          <a href="{{ block.settings.btn_link }}" class="loc-btn {% if block.settings.primary_btn %}loc-btn-primary{% else %}loc-btn-secondary{% endif %}">
+            {{ block.settings.btn_label }}
+          </a>
+        </div>
+      </div>
+    {%- endfor -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Level of Correction",
+  "settings": [
+    { "type": "color", "id": "section_bg", "label": "Section Background", "default": "#f9f8f4" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "TWO CLEAR PATHS" },
+    { "type": "text", "id": "title", "label": "Main Title", "default": "Choose Your Level of Correction" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Start with OTC for immediate structural support..." }
+  ],
+  "blocks": [
+    {
+      "type": "card",
+      "name": "Card",
+      "limit": 3,
+      "settings": [
+        { "type": "checkbox", "id": "show_badge", "label": "Show Badge", "default": false },
+        { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "MOST POPULAR" },
+        { "type": "image_picker", "id": "image", "label": "Card Image" },
+        { "type": "text", "id": "top_label", "label": "Top Label", "default": "START HERE" },
+        { "type": "text", "id": "heading", "label": "Heading", "default": "OTC Structural Orthotics" },
+        { "type": "textarea", "id": "text", "label": "Description", "default": "Rigid arch support that fits any lace-up shoe." },
+        { "type": "text", "id": "price", "label": "Price", "default": "$49.99" },
+        { "type": "text", "id": "price_subtext", "label": "Price Subtext", "default": "per pair" },
+        { "type": "header", "content": "Features" },
+        { "type": "text", "id": "feat_1", "label": "Feature 1", "default": "Rigid structural shell" },
+        { "type": "text", "id": "feat_2", "label": "Feature 2", "default": "Lasts 12+ months" },
+        { "type": "text", "id": "feat_3", "label": "Feature 3", "default": "90-day guarantee" },
+        { "type": "header", "content": "Button" },
+        { "type": "checkbox", "id": "primary_btn", "label": "Use Primary Style", "default": true },
+        { "type": "text", "id": "btn_label", "label": "Button Label", "default": "Shop Now" },
+        { "type": "url", "id": "btn_link", "label": "Button Link" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Level of Correction",
+      "blocks": [ { "type": "card" }, { "type": "card" } ]
+    }
+  ]
+}
+{% endschema %}
