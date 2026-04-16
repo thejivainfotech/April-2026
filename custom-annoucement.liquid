@@ -1,0 +1,118 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .announcement-bar-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 15px 40px; /* Padding for spacing */
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .announcement-wrapper-{{ section.id }} {
+    display: flex;
+    justify-content: center; /* Align text to the right as per image */
+    align-items: center;
+    gap: 10px; /* Space between items */
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .announcement-item-{{ section.id }} {
+    color: {{ section.settings.text_color }};
+    font-size: 11px; /* Smaller font as per professional wellness sites */
+    font-weight: 400;
+    letter-spacing: 0.87px;
+    text-transform: uppercase;
+    opacity: 50%;
+  }
+
+  .announcement-item-{{ section.id }}.highlight {
+    color: {{ section.settings.highlight_color }};
+    font-weight: 400;
+    opacity: 100%;
+  }
+
+  .dot-separator-{{ section.id }} {
+    color: {{ section.settings.text_color }};
+    opacity: 0.4;
+    font-size: 14px;
+    line-height: 1;
+  }
+
+  /* Mobile responsiveness */
+  @media screen and (max-width: 768px) {
+    .announcement-wrapper-{{ section.id }} {
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      text-align: center;
+    }
+    .announcement-item-{{ section.id }} {
+      font-size: 9px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="announcement-bar-{{ section.id }}">
+  <div class="announcement-wrapper-{{ section.id }}">
+    
+    <span class="announcement-item-{{ section.id }} highlight">{{ section.settings.text_1 }}</span>
+    
+    <span class="dot-separator-{{ section.id }}">·</span>
+    
+    <span class="announcement-item-{{ section.id }}">{{ section.settings.text_2 }}</span>
+    
+    <span class="dot-separator-{{ section.id }}">·</span>
+    
+    <span class="announcement-item-{{ section.id }}">{{ section.settings.text_3 }}</span>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Exact Announcement Bar",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#001e3d"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "highlight_color",
+      "label": "Highlight Color",
+      "default": "#E2F300"
+    },
+    {
+      "type": "text",
+      "id": "text_1",
+      "label": "First Text (Yellow)",
+      "default": "FREE SHIPPING $75+"
+    },
+    {
+      "type": "text",
+      "id": "text_2",
+      "label": "Second Text",
+      "default": "90-DAY STRUCTURAL GUARANTEE"
+    },
+    {
+      "type": "text",
+      "id": "text_3",
+      "label": "Third Text",
+      "default": "DESIGNED BY A BOARD-CERTIFIED PODIATRIST"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Exact Announcement Bar"
+    }
+  ]
+}
+{% endschema %}
