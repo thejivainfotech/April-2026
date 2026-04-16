@@ -1,0 +1,386 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+
+{%- style -%}
+ .comp-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 100px 20px;
+    color: #ffffff;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  .comp-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .comp-header {
+    margin-bottom: 60px;
+  }
+  .comp-header p {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 11px;
+    color: #7A90A8;
+    margin-bottom: 15px;
+  }
+  .comp-header h2 {
+    font-size: 54px;
+    margin: 0 auto 20px;
+    max-width: 780px;
+    font-weight: 800;
+    line-height: 60px;
+    color: #E8EDF2;
+  }
+  .comp-header span.highlight {
+    color: #01ADDE;
+  }
+  .comp-header .desc {
+    font-size: 17px;
+    color: #7A90A8;
+    max-width: 470px;
+    margin: 0 auto;
+    line-height: 28px;
+  }
+
+  /* Table Wrapper with VS Background */
+  .table-outer-wrapper {
+    position: relative;
+    background: #01203F30;
+    border-radius: 24px;
+    border: 1px solid #00A65726;
+    margin-top: 50px;
+    overflow: hidden;
+    box-shadow: 
+        0px 4px 40px 0px rgba(0, 0, 0, 0.30),
+        0px 0px 80px 0px rgba(0, 166, 87, 0.05);
+  }
+
+  /* VS Watermark Layer */
+  .vs-bg-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+  .vs-bg-overlay img {
+    width: 450px;
+    opacity: 0.08;
+    filter: brightness(0) invert(1);
+  }
+  .vs-text-fallback {
+    font-size: 342px;
+    font-weight: 900;
+    color: #FFFFFF03;
+    letter-spacing: -10px;
+    line-height: 580px;
+}
+
+  .comp-table {
+    width: 100%;
+    border-collapse: collapse;
+    position: relative;
+    z-index: 2; /* Content VS ke upar dikhega */
+  }
+
+  .comp-table th, .comp-table td {
+    padding: 25px 20px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    vertical-align: middle;
+    background: rgba(0, 0, 0, 0.30), rgba(0, 166, 87, 0.05);
+  }
+
+  .comp-table th {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.19px;
+    color: #ffffff45;
+    font-weight: 600;
+  }
+
+  /* INLINE TEXT LOGIC */
+  .val-wrapper {
+    display: flex;
+    flex-direction: row; /* Horizontal layout */
+    align-items: baseline; /* Text base align karega */
+    gap: 8px; /* Space between main and sub text */
+    white-space: nowrap; /* Wrap nahi hone dega */
+  }
+  
+  .val-main {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff55;
+  }
+  .val-sub {
+    font-size: 13px;
+    color: #FFFFFF30;
+    font-weight: 400;
+  }
+
+  /* Highlighted Column Styles */
+  .highlight-col {
+    background: #00A65712;
+    border-left: 2px solid #00A65730;
+    border-bottom: 1px solid #00A65730;
+    width: 30%;
+  }
+  .highlight-col.header-cell {
+    color: #00A657 !important;
+    background-color: #00A65712;
+    border-left: 2px solid #00A65730;
+    border-bottom: 2px solid #00A65730;
+  }
+  .highlight-col .val-main {
+    /* color: #4df0d1; */
+    font-weight: 800;
+    font-size: 17px;
+    background: linear-gradient(180deg, #00A657 0%, #00AEEC 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .highlight-col .val-sub {
+    color: #FFFFFF;
+    font-size: 14px;
+  }
+
+  .feature-label {
+    font-weight: 600;
+    color: #E8EDF2;
+    width: 22%;
+    font-size: 13px;
+  }
+
+  /* Icons */
+  .icon-wrap {
+    display: inline-block;
+    margin-left: 4px;
+    font-size: 14px;
+  }
+  .cross-mark { color: rgba(255,255,255,0.3); }
+  .check-mark { color: #4df0d1; font-weight: bold; }
+
+  /* Verdict Row */
+  .verdict-row td {
+    border-bottom: none;
+    padding: 30px 20px;
+  }
+  .verdict-text {
+    font-size: 14px;
+    color: #FFFFFF4D;
+    font-weight: 600;
+  }
+  
+  /* Styled Verdict Button */
+  .verdict-btn {
+    background: linear-gradient(90deg, #00A657 0%, #00AEEC 100%);
+    color: #fff !important;
+    padding: 5px 14px;
+    border-radius: 60px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0px 2px 12px 0px rgba(0, 166, 87, 0.30);
+    cursor: pointer;
+  }
+  tr.verdict-row {
+    background-color: #00A6571A;
+    border: 2px solid #00A65733;
+    border-radius: 70px;
+  }
+
+  /* Quote Section */
+  .comp-footer {
+    margin-top: 80px;
+    max-width: 750px;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 36px;
+    color: #E8EDF2;
+  }
+  .comp-footer h4 {
+    font-family: "Plus Jakarta Sans";
+    font-size: 22px;
+    line-height: 36px;
+    color: #7A90A8;
+    font-style: italic;
+    margin-bottom: 20px;
+    border: none;
+    padding: 0;
+    font-weight: 400;
+  }
+  .comp-footer cite {
+    font-style: normal;
+    font-weight: 700;
+    color: #fff;
+    font-size: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .table-outer-wrapper { overflow-x: auto; }
+    .comp-table { min-width: 800px; }
+    .val-wrapper { white-space: normal; }
+    .comp-header h2 {
+    font-size: 32px;
+    line-height: 35px;
+  }
+  .comp-footer h4 {
+    font-size: 16px;
+    line-height: 26px;
+  }
+  .comp-footer h3 {
+    font-size: 18px;
+}
+  }
+{%- endstyle -%}
+
+<section class="comp-section-{{ section.id }}">
+  <div class="comp-container">
+    
+    <div class="comp-header">
+      <p>{{ section.settings.sub-heading }}</p>
+      <h2>{{ section.settings.heading | replace: '[', '<span class="highlight">' | replace: ']', '</span>' }}</h2>
+      <div class="desc">{{ section.settings.description }}</div>
+    </div>
+
+    <div class="table-outer-wrapper">
+      <div class="vs-bg-overlay">
+        {% if section.settings.vs_image != blank %}
+          <img src="{{ section.settings.vs_image | img_url: '800x' }}" alt="VS">
+        {% else %}
+          <h3 class="vs-text-fallback">VS</h3>
+        {% endif %}
+      </div>
+
+      <table class="comp-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>{{ section.settings.col_1_title }}</th>
+            <th>{{ section.settings.col_2_title }}</th>
+            <th class="highlight-col header-cell">{{ section.settings.col_3_title }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for block in section.blocks %}
+            <tr>
+              <td class="feature-label">{{ block.settings.feature_name }}</td>
+              
+              <td>
+                <div class="val-wrapper">
+                  {% assign p1 = block.settings.val_1 | split: '|' %}
+                  <span class="val-main">{{ p1[0] }}</span>
+                  {% if p1[1] != blank %}<span class="val-sub">{{ p1[1] }}</span>{% endif %}
+                  {% if block.settings.show_icon_1 == 'cross' %}<span class="icon-wrap cross-mark">✕</span>{% endif %}
+                </div>
+              </td>
+
+              <td>
+                <div class="val-wrapper">
+                  {% assign p2 = block.settings.val_2 | split: '|' %}
+                  <span class="val-main">{{ p2[0] }}</span>
+                  {% if p2[1] != blank %}<span class="val-sub">{{ p2[1] }}</span>{% endif %}
+                  {% if block.settings.show_icon_2 == 'cross' %}<span class="icon-wrap cross-mark">✕</span>{% endif %}
+                </div>
+              </td>
+
+              <td class="highlight-col">
+                <div class="val-wrapper">
+                  {% assign p3 = block.settings.val_3 | split: '|' %}
+                  <span class="val-main">{{ p3[0] }}</span>
+                  {% if p3[1] != blank %}<span class="val-sub">{{ p3[1] }}</span>{% endif %}
+                  {% if block.settings.show_icon_3 == 'check' %}<span class="icon-wrap check-mark"><svg width="11" height="9" viewBox="0 0 11 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M-2.21133e-05 4.53325L1.50211 3.02579L3.96837 5.44944L9.4389 0.000222027L10.9517 1.50768L3.96837 8.4537L-2.21133e-05 4.53325Z" fill="#00A657"/>
+</svg>
+</span>{% endif %}
+                </div>
+              </td>
+            </tr>
+          {% endfor %}
+
+          <tr class="verdict-row">
+            <td class="feature-label">Verdict</td>
+            <td class="verdict-text">{{ section.settings.verdict_1 }}</td>
+            <td class="verdict-text">{{ section.settings.verdict_2 }}</td>
+            <td class="highlight-col">
+              <div class="verdict-btn"><svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_290_127)">
+<path d="M11 5.53993V5.99993C10.9994 7.07814 10.6503 8.12727 10.0047 8.99084C9.35908 9.85442 8.45164 10.4862 7.41768 10.7919C6.38372 11.0976 5.27863 11.0609 4.26724 10.6872C3.25584 10.3136 2.39233 9.62298 1.80548 8.71847C1.21863 7.81395 0.939896 6.74396 1.01084 5.66809C1.08178 4.59221 1.4986 3.5681 2.19914 2.74847C2.89968 1.92884 3.84639 1.35762 4.89809 1.12001C5.9498 0.882387 7.05013 0.991101 8.035 1.42993" stroke="white" stroke-width="1.25"/>
+<path d="M11 2L6 7.005L4.5 5.505" stroke="white" stroke-width="1.25"/>
+</g>
+<defs>
+<clipPath id="clip0_290_127">
+<rect width="12" height="12" fill="white"/>
+</clipPath>
+</defs>
+</svg>
+{{ section.settings.verdict_btn_label }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    {% if section.settings.footer_quote != blank %}
+      <div class="comp-footer">
+        <h4>"{{ section.settings.footer_quote }}"</h4>
+        <h3>— {{ section.settings.footer_author }}</h3>
+      </div>
+    {% endif %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Comparison Table Pro",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#051122" },
+    { "type": "image_picker", "id": "vs_image", "label": "Center VS Image" },
+    { "type": "text", "id": "sub-heading", "label": "Sub-heading", "default": "BEFORE YOU SPEND ANOTHER DOLLAR" },
+    { "type": "text", "id": "heading", "label": "Heading (Use [ ] for Cyan)", "default": "The Insole Industry Is [Designed] to Keep You Coming Back" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "You're not failing to find the right insole. The right insole doesn't exist on that shelf. Here's proof." },
+    { "type": "header", "content": "Column Titles" },
+    { "type": "text", "id": "col_1_title", "label": "Column 1 Title", "default": "DRUGSTORE INSOLES" },
+    { "type": "text", "id": "col_2_title", "label": "Column 2 Title", "default": "GOOD FEET STORE" },
+    { "type": "text", "id": "col_3_title", "label": "Column 3 Title", "default": "RUN DOC WELLNESS +" },
+    { "type": "header", "content": "Verdict Row" },
+    { "type": "text", "id": "verdict_1", "label": "Verdict 1", "default": "Planned obsolescence" },
+    { "type": "text", "id": "verdict_2", "label": "Verdict 2", "default": "Overpriced & unqualified" },
+    { "type": "text", "id": "verdict_btn_label", "label": "Verdict Button Label", "default": "Best Value — Clinical Grade" },
+    { "type": "header", "content": "Footer Quote" },
+    { "type": "textarea", "id": "footer_quote", "label": "Quote Text" },
+    { "type": "text", "id": "footer_author", "label": "Author Name" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Table Row",
+      "settings": [
+        { "type": "text", "id": "feature_name", "label": "Feature Name", "default": "Price" },
+        { "type": "text", "id": "val_1", "label": "Value 1 (Use | for subtitle)", "default": "$15–50 | per 3 months" },
+        { "type": "select", "id": "show_icon_1", "label": "Icon 1", "options": [{"value":"none","label":"None"},{"value":"cross","label":"Cross"}], "default": "none" },
+        { "type": "text", "id": "val_2", "label": "Value 2", "default": "$1,200–5,000+" },
+        { "type": "select", "id": "show_icon_2", "label": "Icon 2", "options": [{"value":"none","label":"None"},{"value":"cross","label":"Cross"}], "default": "none" },
+        { "type": "text", "id": "val_3", "label": "Value 3", "default": "$49.99 | per pair" },
+        { "type": "select", "id": "show_icon_3", "label": "Icon 3", "options": [{"value":"none","label":"None"},{"value":"check","label":"Checkmark"}], "default": "check" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Comparison Table Pro"
+    }
+  ]
+}
+{% endschema %}
