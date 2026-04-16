@@ -1,0 +1,270 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+
+{% comment %}
+  PRO Stats Counter Section
+{% endcomment %}
+
+<style>
+.pro-stats {
+  padding: {{ section.settings.padding_top }}px {{ section.settings.padding_side }}px {{ section.settings.padding_bottom }}px;
+  background: {{ section.settings.bg_color }};
+}
+
+.pro-stats-wrapper {
+  display: flex;
+  justify-content: center;
+  gap: {{ section.settings.gap }}px;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.pro-stat-item {
+  min-width: 120px;
+}
+
+.pro-stat-number {
+  font-size: {{ section.settings.number_size }}px;
+  font-weight: 700;
+  color: {{ section.settings.number_color }};
+}
+
+.pro-stat-suffix {
+background: linear-gradient(
+    90deg,
+    #00a657,
+    #00aeec
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: {{ section.settings.suffix_size }}px;
+  font-weight: 600;
+  margin-left: -10px;
+}
+
+.pro-stat-label {
+  {% comment %} margin-top: 8px; {% endcomment %}
+  font-size: {{ section.settings.label_size }}px;
+  color: {{ section.settings.label_color }};
+  letter-spacing: 1px;
+}
+
+/* Mobile */
+/* ✅ Mobile Grid Layout (2x2 like your image) */
+@media(max-width: 767px){
+  .pro-stats-wrapper{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    gap: {{ section.settings.gap_mobile }}px;
+  }
+
+  .pro-stat-item{
+    width: 100%;
+  }
+
+  .pro-stat-number{
+    font-size: 34px;
+  }
+
+  .pro-stat-label{
+    font-size: {{ section.settings.label_size | times: 0.9 }}px;
+            width: 120px;
+            margin: 0 auto;
+  }
+  .pro-stat-suffix{
+    margin-left: -5px;
+
+}
+.pro-stats{
+    padding: 70px 12px 70px;
+}
+}
+</style>
+
+<section class="pro-stats">
+  <div class="pro-stats-wrapper">
+    
+    {% for block in section.blocks %}
+      <div class="pro-stat-item" {{ block.shopify_attributes }}>
+        
+        <div class="pro-stat-number">
+          {{ block.settings.number }}
+          <span class="pro-stat-suffix">{{ block.settings.suffix }}</span>
+        </div>
+
+        <div class="pro-stat-label">
+          {{ block.settings.label }}
+        </div>
+
+      </div>
+    {% endfor %}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Stats Counter",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f5f5f5"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "label": "Padding Top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "default": 40,
+      "label": "Padding Bottom"
+    },
+    {
+      "type": "range",
+      "id": "padding_side",
+      "min": 0,
+      "max": 60,
+      "step": 5,
+      "default": 20,
+      "label": "Side Padding"
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 10,
+      "max": 100,
+      "step": 5,
+      "default": 60,
+      "label": "Gap Between Items"
+    },
+    {
+      "type": "range",
+      "id": "gap_mobile",
+      "min": 10,
+      "max": 50,
+      "step": 5,
+      "default": 20,
+      "label": "Gap Mobile"
+    },
+
+    {
+      "type": "color",
+      "id": "number_color",
+      "label": "Number Color",
+      "default": "#0b2c48"
+    },
+    {
+      "type": "color",
+      "id": "label_color",
+      "label": "Label Color",
+      "default": "#7a7a7a"
+    },
+
+    {
+      "type": "range",
+      "id": "number_size",
+      "min": 20,
+      "max": 100,
+      "step": 2,
+      "default": 48,
+      "label": "Number Font Size"
+    },
+    {
+      "type": "range",
+      "id": "suffix_size",
+      "min": 10,
+      "max": 40,
+      "step": 1,
+      "default": 20,
+      "label": "Suffix Font Size"
+    },
+    {
+      "type": "range",
+      "id": "label_size",
+      "min": 10,
+      "max": 30,
+      "step": 1,
+      "default": 12,
+      "label": "Label Font Size"
+    }
+  ],
+
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "Stat Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "number",
+          "label": "Number",
+          "default": "0"
+        },
+        {
+          "type": "text",
+          "id": "suffix",
+          "label": "Suffix (+, Day, Mo, etc)",
+          "default": "+"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Label",
+          "default": "Years Experience"
+        }
+      ]
+    }
+  ],
+
+  "presets": [
+    {
+      "name": "Stats Counter",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "suffix": "+",
+            "label": "YEARS CLINICAL PRACTICE"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "suffix": "Day",
+            "label": "STRUCTURAL GUARANTEE"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "0",
+            "suffix": "+ Mo",
+            "label": "ORTHOTIC LIFESPAN"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "number": "$0.14",
+            "suffix": "/day",
+            "label": "COST PER DAY"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
