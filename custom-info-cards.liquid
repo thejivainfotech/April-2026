@@ -1,0 +1,306 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+
+{% comment %}
+  Custom Info Cards Section with Description and Padding Settings
+{% endcomment %}
+
+<style>
+.info-cards {
+    padding-top: {{ section.settings.padding_top_mobile }}px;
+    padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .info-cards {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .info-cards .page-width {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .info-cards .section-header {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto 60px;
+  }
+  .info-cards .subheading {
+    color: #00A657;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.9px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: block;
+  }
+  .info-cards .main-title {
+    font-size: 56px;
+    color: #01203F;
+    font-weight: 800;
+    line-height: 62px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    margin-inline: auto;
+    max-width: 480px;
+  }
+  .info-cards .main-description {
+    font-size: 16px;
+    color: #3A4554;
+    line-height: 26px;
+    margin-top: 0;
+  }
+  .info-cards .main-description p {
+    margin: 0;
+  }
+
+  .info-cards .cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+  }
+  .info-cards .card-item {
+    flex: 1;
+    min-width: 300px;
+    max-width: 480px;
+    background: #FAFAF8;
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid #D8DCE2;
+  }
+
+  .info-cards .card-image-wrap {
+    position: relative;
+    padding-top: 80%; 
+    overflow: hidden;
+  }
+  .info-cards .card-image-wrap img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .info-cards .card-info {
+    padding: 30px;
+  }
+  
+  /* {% for block in section.blocks %}
+    .card-tag-{{ block.id }} {
+      color: {{ block.settings.tag_color }};
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.96px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      display: block;
+    }
+  {% endfor %} */
+
+  .info-cards .card-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: #01203F;
+    line-height: 20px;
+    margin-top: 8px;
+    margin-bottom: 10px;
+  }
+  .info-cards .card-desc {
+    font-size: 13px;
+    color: #3A4554;
+    line-height: 22px;
+  }
+
+  @media (max-width: 767px) {
+    .info-cards .card-item {
+      max-width: 100%;
+      flex: none;
+    }
+    .info-cards .main-title { 
+        font-size: 32px;
+        line-height: 35px;
+    }
+  }
+</style>
+
+<section class="info-cards">
+  <div class="page-width">
+    
+    <div class="section-header">
+      {%- if section.settings.subheading != blank -%}
+        <span class="subheading">{{ section.settings.subheading }}</span>
+      {%- endif -%}
+      {%- if section.settings.title != blank -%}
+        <h2 class="main-title">{{ section.settings.title }}</h2>
+      {%- endif -%}
+      {%- if section.settings.main_description != blank -%}
+        <div class="main-description">{{ section.settings.main_description }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="cards-container">
+      {%- for block in section.blocks -%}
+        <div class="card-item" {{ block.shopify_attributes }}>
+          <div class="card-image-wrap">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | img_url: '800x' }}" alt="{{ block.settings.title | escape }}" loading="lazy">
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          
+          <div class="card-info">
+            {%- if block.settings.tag != blank -%}
+              <span class="card-tag-{{ block.id }}">{{ block.settings.tag }}</span>
+            {%- endif -%}
+            {%- if block.settings.title != blank -%}
+              <h3 class="card-title">{{ block.settings.title }}</h3>
+            {%- endif -%}
+            {%- if block.settings.text != blank -%}
+              <div class="card-desc">{{ block.settings.text }}</div>
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Dynamic Info Cards",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f7f2"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "WHO THIS IS FOR"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Built for People Who've Been Failed Before"
+    },
+    {
+      "type": "richtext",
+      "id": "main_description",
+      "label": "Main Description",
+      "default": "<p>Three types of people find us. All three have been sold garbage. We built a product for each.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding (Desktop)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 80
+    },
+    {
+      "type": "header",
+      "content": "Section Padding (Mobile)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Top Padding Mobile",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Bottom Padding Mobile",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_card",
+      "name": "Card",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Card Image"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Top Tag",
+          "default": "8-12 HOUR SHIFTS"
+        },
+        {
+          "type": "color",
+          "id": "tag_color",
+          "label": "Tag Color",
+          "default": "#3d8c63"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title",
+          "default": "On-Their-Feet Professionals"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Card Content",
+          "default": "<p>Nurses, teachers, chefs, warehouse workers. Everything you’ve tried compresses by lunch.</p>"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Dynamic Info Cards",
+      "blocks": [
+        { "type": "info_card" },
+        { "type": "info_card" },
+        { "type": "info_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
