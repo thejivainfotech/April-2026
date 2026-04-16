@@ -1,0 +1,306 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.section_bg_color }};
+  }
+
+  /* Inner Box Styling */
+  .quiz-container-{{ section.id }} {
+    background: {{ section.settings.box_gradient }};
+    border-radius: 28px;
+    padding: 80px 72px;
+    text-align: center;
+    color: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  }
+
+  .quiz-subtitle {
+    text-transform: uppercase;
+    letter-spacing: 1.96px;
+    line-height: 18px;
+    font-size: 11px;
+    font-weight: 600;
+    color: {{ section.settings.accent_color }};
+    margin-bottom: 15px;
+    display: block;
+  }
+
+  .quiz-title {
+    font-size: 56px;
+    font-weight: 800;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    line-height: 62px;
+    color: #E8EDF2;
+    max-width: 620px;
+    margin-inline: auto;
+  }   
+
+  .quiz-description {
+    font-size: 16px;
+    font-weight: 400;
+    max-width: 480px;
+    margin: 0 auto 30px;
+    line-height: 27px;
+    color: #7A90A8;
+  }
+
+  /* Buttons Wrapper */
+  .quiz-buttons-flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  /* Primary Gradient Button */
+  .quiz-btn {
+    background: linear-gradient(90deg, #00A657, #00AEEC);
+    color: #FFFFFF;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: none;
+    font-size: 14px;
+    line-height: 23px;
+  }
+
+  /* Secondary Outlined Button */
+  .quiz-btn-secondary {
+    background: transparent;
+    color: #E8EDF2;
+    padding: 15px 38px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-block;
+    transition: all 0.3s ease;
+    border: 1px solid #FFFFFF33;
+    font-size: 14px;
+    line-height: 23px;
+    letter-spacing: 0.14px;
+  }
+
+  .quiz-btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+  }
+
+  .quiz-features {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    margin-top: 40px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+
+  .feature-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+    font-size: 11px;
+    color: #7A90A8;
+  }
+
+  @media (max-width: 768px) {
+    .quiz-container-{{ section.id }} {
+      padding: 40px 15px;
+      margin: 0 15px;
+    }
+    .quiz-title {
+        font-size: 32px;
+        line-height: 35px;
+    }
+    .quiz-buttons-flex {
+      flex-direction: column;
+      gap: 12px;
+    }
+    .quiz-btn, .quiz-btn-secondary {
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="page-width">
+    <div class="quiz-container-{{ section.id }}">
+      
+      {% if section.settings.sub_title != blank %}
+        <span class="quiz-subtitle">{{ section.settings.sub_title }}</span>
+      {% endif %}
+
+      <h2 class="quiz-title">{{ section.settings.title }}</h2>
+      
+      {% if section.settings.text != blank %}
+        <div class="quiz-description">
+          {{ section.settings.text }}
+        </div>
+      {% endif %}
+
+      <div class="quiz-buttons-flex">
+        {% if section.settings.btn_label != blank %}
+          <a href="{{ section.settings.btn_link }}" class="quiz-btn">
+            {{ section.settings.btn_label }}
+          </a>
+        {% endif %}
+
+        {% if section.settings.btn_label_2 != blank %}
+          <a href="{{ section.settings.btn_link_2 }}" class="quiz-btn-secondary">
+            {{ section.settings.btn_label_2 }}
+          </a>
+        {% endif %}
+      </div>
+
+      <div class="quiz-features">
+        {% for block in section.blocks %}
+          <span class="feature-item" {{ block.shopify_attributes }}>
+            <svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8.35352 0.353516L2.85352 5.85352L0.353516 3.35352" stroke="#00A657"/>
+                </svg>
+            {{ block.settings.feature_text }}
+          </span>
+        {% endfor %}
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Quiz Banner Advanced",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout Settings"
+    },
+    {
+      "type": "color",
+      "id": "section_bg_color",
+      "label": "Section Background (Outer)",
+      "default": "#f9f9f9"
+    },
+    {
+      "type": "color_background",
+      "id": "box_gradient",
+      "label": "Quiz Box Gradient",
+      "default": "linear-gradient(135deg, #1e4a94 0%, #163a75 100%)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Subtitle Color",
+      "default": "#d4d44d"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Subtitle",
+      "default": "YOUR FEET DESERVE A REAL DOCTOR"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Title",
+      "default": "Ready to Experience Structural Support?"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Description",
+      "default": "<p>Same structural principles prescribed in Dr. Wachtel's clinical practice. Delivered to your door. Backed by a 90-day guarantee.</p>"
+    },
+    {
+      "type": "header",
+      "content": "Button 1 (Gradient)"
+    },
+    {
+      "type": "text",
+      "id": "btn_label",
+      "label": "Button 1 Label",
+      "default": "Shop OTC Orthotics — $49.99"
+    },
+    {
+      "type": "url",
+      "id": "btn_link",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "header",
+      "content": "Button 2 (Outline)"
+    },
+    {
+      "type": "text",
+      "id": "btn_label_2",
+      "label": "Button 2 Label (Hide if empty)",
+      "default": "Take the 60-Second Quiz"
+    },
+    {
+      "type": "url",
+      "id": "btn_link_2",
+      "label": "Button 2 Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Feature Point",
+      "settings": [
+        {
+          "type": "text",
+          "id": "feature_text",
+          "label": "Feature Text",
+          "default": "Designed by a Board-Certified DPM"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Banner Advanced",
+      "blocks": [
+        { "type": "feature", "settings": { "feature_text": "Board-Certified DPM" } },
+        { "type": "feature", "settings": { "feature_text": "90-Day Guarantee" } },
+        { "type": "feature", "settings": { "feature_text": "Free Shipping $75+" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
