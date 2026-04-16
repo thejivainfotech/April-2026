@@ -1,0 +1,203 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .story-container {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .story-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .story-header h2 {
+    font-size: 56px;
+    font-weight: 800;
+    color: #01203F;
+    line-height: 62px;
+    margin: 0;
+    max-width: 480px;
+    margin-inline: auto;
+  }
+
+  .story-content {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .story-text-block {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #425466;
+  }
+
+  .story-text-block p {
+    font-size: 17px;
+    line-height: 31px;
+    margin-bottom: 20px;
+    color: #3A4554;
+  }
+
+  .story-quote-wrapper {
+    display: flex;
+    margin: 10px 0;
+    gap: 25px;
+  }
+
+  .story-quote-accent {
+    width: 4px;
+    background: linear-gradient(180deg, #00A657 0%, #00AEEC 100%);
+    flex-shrink: 0;
+  }
+
+  .story-quote-text {
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 500;
+    color: #01203F;
+    line-height: 37px;
+    margin: 0;
+  }
+
+  @media screen and (max-width: 767px) {
+    .story-quote-text {
+      font-size: 20px;
+    }
+    .story-text-block {
+      font-size: 16px;
+    }
+    .story-header h2 {
+        font-size: 32px;
+        line-height: 35px;
+    }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="story-container">
+    
+    {%- if section.settings.title != blank -%}
+      <div class="story-header">
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+    {%- endif -%}
+
+    <div class="story-content">
+      {%- for block in section.blocks -%}
+        {%- case block.type -%}
+          
+          {%- when 'paragraph' -%}
+            <div class="story-text-block" {{ block.shopify_attributes }}>
+              {{ block.settings.text }}
+            </div>
+
+          {%- when 'quote' -%}
+            <div class="story-quote-wrapper" {{ block.shopify_attributes }}>
+              <div class="story-quote-accent"></div>
+              <blockquote class="story-quote-text">
+                "{{ block.settings.quote }}"
+              </blockquote>
+            </div>
+
+        {%- endcase -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Full Story Section",
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "title",
+      "label": "Heading",
+      "default": "Why I Built Run Doc Wellness"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#fdfbf7"
+    },
+    {
+      "type": "header",
+      "content": "Section Padding"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "paragraph",
+      "name": "Paragraph",
+      "settings": [
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "Text Content",
+          "default": "<p>Share your brand's mission or backstory here.</p>"
+        }
+      ]
+    },
+    {
+      "type": "quote",
+      "name": "Highlighted Quote",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote",
+          "default": "I was tired of watching my patients spend money on products designed to fail them."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Full Story Section",
+      "blocks": [
+        { "type": "paragraph" },
+        { "type": "quote" },
+        { "type": "paragraph" }
+      ]
+    }
+  ]
+}
+{% endschema %}
