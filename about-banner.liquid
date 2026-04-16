@@ -1,0 +1,306 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+<style>
+  .dr-custom-wrapper-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .dr-custom-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+
+  .dr-custom-flex {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    flex-wrap: wrap;
+  }
+
+  .dr-custom-image-side {
+    flex: 0 0 40%;
+    max-width: 450px;
+  }
+
+  .dr-img-container {
+    border-radius: 40px;
+    overflow: hidden;
+    background: #f0f0f0;
+    line-height: 0;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+  }
+
+  .dr-img-container img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .dr-custom-content-side {
+    flex: 1;
+    min-width: 350px;
+    color: #ffffff;
+  }
+
+  .dr-custom-subtitle {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 1.96px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    opacity: 0.7;
+    font-weight: 600;
+    color: #7A90A8;
+  }
+
+  .dr-custom-title {
+    font-size: 80px;
+    font-weight: 800;
+    line-height: 88px;
+    margin: 0 0 25px 0;
+    color: #E8EDF2;
+  }
+
+  /* Gradient Title Logic */
+  .dr-custom-title span {
+    background: {{ section.settings.accent_gradient }};
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+
+  .dr-custom-desc {
+    font-size: 18px;
+    line-height: 31px;
+    margin-bottom: 20px;
+    opacity: 0.85;
+    max-width: 520px;
+    color: #7A90A8;
+  }
+
+  .dr-custom-tags {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 45px;
+  }
+
+  .dr-custom-tag {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.83px;
+    padding: 8px 16px;
+    border-radius: 50px;
+    border: 1px solid #00A65726;
+    background: #00A65708;
+    color: {{ section.settings.tag_text_color }};
+    text-transform: uppercase;
+  }
+
+  .dr-custom-actions {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .dr-btn-main {
+    background: linear-gradient(90deg, #00A657 0%, #00AEEC 100%);
+    color: #fff;
+    padding: 16px 38px;
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 14px;
+    box-shadow: 0 10px 20px #00A6574D;
+    letter-spacing: 0.14px;
+  }
+
+  .dr-btn-outline {
+    color: #E8EDF2;
+    padding: 16px 38px;
+    border-radius: 50px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 14px;
+    border: 1px solid #FFFFFF33;
+    letter-spacing: 0.14px;
+  }
+
+  @media (max-width: 991px) {
+    .dr-custom-wrapper-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | divided_by: 2 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | divided_by: 2 }}px;
+    }
+    .dr-custom-container {
+        padding-inline: 20px;
+    }
+    .dr-custom-title {
+        font-size: 44px;
+        line-height: 48px;
+        margin-bottom: 20px;
+    }
+    .dr-btn-main { 
+        width: 100%;
+        text-align: center;
+    }
+    .dr-btn-outline { 
+        width: 100%;
+        text-align: center;
+    }
+    .dr-custom-flex { flex-direction: column; gap: 50px; align-items: baseline; }
+    .dr-custom-image-side { max-width: 100%; flex: 0 0 100%; }
+    .dr-custom-tags, .dr-custom-actions { justify-content: left; flex-direction: column; align-items: baseline;}
+    .dr-custom-desc { margin-left: auto; margin-right: auto; font-size: 16px; }
+  }
+</style>
+
+<section class="dr-custom-wrapper-{{ section.id }}">
+  <div class="dr-custom-container">
+    <div class="dr-custom-flex">
+      
+      <div class="dr-custom-image-side">
+        <div class="dr-img-container">
+          {% if section.settings.doctor_image != blank %}
+            {{ section.settings.doctor_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+          {% else %}
+            {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="dr-custom-content-side">
+        {% if section.settings.subtitle != blank %}
+          <span class="dr-custom-subtitle">{{ section.settings.subtitle }}</span>
+        {% endif %}
+
+        <h2 class="dr-custom-title">
+          {{ section.settings.title_white }} <span>{{ section.settings.title_accent }}</span>
+        </h2>
+
+        {% if section.settings.description != blank %}
+          <div class="dr-custom-desc">{{ section.settings.description }}</div>
+        {% endif %}
+
+        <div class="dr-custom-tags">
+          {% if section.settings.tag1 != blank %}<div class="dr-custom-tag">{{ section.settings.tag1 }}</div>{% endif %}
+          {% if section.settings.tag2 != blank %}<div class="dr-custom-tag">{{ section.settings.tag2 }}</div>{% endif %}
+          {% if section.settings.tag3 != blank %}<div class="dr-custom-tag">{{ section.settings.tag3 }}</div>{% endif %}
+          {% if section.settings.tag4 != blank %}<div class="dr-custom-tag">{{ section.settings.tag4 }}</div>{% endif %}
+        </div>
+
+        <div class="dr-custom-actions">
+          {% if section.settings.btn1_text != blank %}
+            <a href="{{ section.settings.btn1_url }}" class="dr-btn-main">{{ section.settings.btn1_text }}</a>
+          {% endif %}
+          {% if section.settings.btn2_text != blank %}
+            <a href="{{ section.settings.btn2_url }}" class="dr-btn-outline">{{ section.settings.btn2_text }}</a>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Doctor Profile Hero V3",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Spacing (Top/Bottom)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Top Padding",
+      "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 200,
+      "step": 10,
+      "unit": "px",
+      "label": "Bottom Padding",
+      "default": 100
+    },
+    {
+      "type": "header",
+      "content": "Content Settings"
+    },
+    {
+      "type": "image_picker",
+      "id": "doctor_image",
+      "label": "Doctor Image"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitle (Text above title)",
+      "default": "MEET YOUR PODIATRIST"
+    },
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "Title (White Part)",
+      "default": "Dr. Mitchell Wachtel,"
+    },
+    {
+      "type": "text",
+      "id": "title_accent",
+      "label": "Title (Accent Part)",
+      "default": "DPM"
+    },
+    {
+      "type": "color_background",
+      "id": "accent_gradient",
+      "label": "Accent Gradient Color",
+      "default": "linear-gradient(90deg, rgba(0,201,167,1) 0%, rgba(0,206,209,1) 100%)"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "header",
+      "content": "Tags (4 Slots)"
+    },
+    { "type": "text", "id": "tag1", "label": "Tag 1", "default": "BOARD-CERTIFIED DPM" },
+    { "type": "text", "id": "tag2", "label": "Tag 2", "default": "25+ YEARS EXPERIENCE" },
+    { "type": "text", "id": "tag3", "label": "Tag 3", "default": "ACTIVE PRACTICE" },
+    { "type": "text", "id": "tag4", "label": "Tag 4", "default": "PODIATRIC MEDICINE" },
+    {
+      "type": "header",
+      "content": "Theme Colors"
+    },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#001e3c" },
+    { "type": "color", "id": "tag_text_color", "label": "Tag Text Color", "default": "#4ade80" },
+    {
+      "type": "header",
+      "content": "Buttons"
+    },
+    { "type": "text", "id": "btn1_text", "label": "Button 1 Text", "default": "Shop OTC Orthotics" },
+    { "type": "url", "id": "btn1_url", "label": "Button 1 URL" },
+    { "type": "text", "id": "btn2_text", "label": "Button 2 Text", "default": "Take the Quiz" },
+    { "type": "url", "id": "btn2_url", "label": "Button 2 URL" }
+  ],
+  "presets": [
+    {
+      "name": "Doctor Profile Hero V3"
+    }
+  ]
+}
+{% endschema %}
