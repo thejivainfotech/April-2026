@@ -1,0 +1,244 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .timeline-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 0;
+    position: relative;
+    color: #ffffff;
+    overflow: hidden;
+  }
+
+  /* Watermark */
+.timeline-watermark {
+    position: absolute;
+    bottom: -80px;
+    right: 0px;
+    font-size: 135px;
+    font-weight: 800;
+    color: #FFFFFF04;
+    pointer-events: none;
+    z-index: 1;
+}
+
+  .timeline-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .timeline-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .timeline-top-label {
+    display: block;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.96px;
+    margin-bottom: 8px;
+    opacity: 0.7;
+    font-weight: 600;
+    color: #7A90A8;
+  }
+
+  .timeline-main-heading {
+    font-size: 56px;
+    margin-top: 15px;
+    margin-inline: auto;
+    margin-bottom: 25px;
+    font-weight: 800;
+    line-height: 62px;
+    color: #E8EDF2;
+    max-width: 500px;
+  }
+
+  .timeline-description {
+    opacity: 0.8;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 26px;
+    font-size: 16px;
+    color: #7A90A8;
+  }
+
+  /* Vertical Center Line */
+  .timeline-wrapper {
+    position: relative;
+  }
+  .timeline-wrapper::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(0, 212, 163, 0.2);
+    transform: translateX(-50%);
+  }
+
+  .timeline-item {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 60px;
+    width: 100%;
+    position: relative;
+  }
+
+  .timeline-content-side { width: 45%; }
+  .timeline-badge-side { width: 45%; display: flex; align-items: center; }
+
+  /* Center Dot */
+  .timeline-dot {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background-image: linear-gradient(#00A657, #00AEEC);
+    border-radius: 50%;
+    z-index: 3;
+    box-shadow: 0 0 20px 0 rgba(0, 166, 87, 0.3);
+  }
+
+  /* Desktop Alternating Layout */
+  .timeline-item:nth-child(odd) { flex-direction: row; }
+  .timeline-item:nth-child(odd) .timeline-content-side { text-align: right; padding-right: 25px; }
+  .timeline-item:nth-child(odd) .timeline-badge-side { justify-content: flex-start; padding-left: 25px; }
+
+  .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+  .timeline-item:nth-child(even) .timeline-content-side { text-align: left; padding-left: 25px; }
+  .timeline-item:nth-child(even) .timeline-badge-side { justify-content: flex-end; padding-right: 25px; }
+
+  /* Badge Style */
+  .timeline-badge {
+    background-image: linear-gradient(90deg, #00A657 0%, #00AEEC 100%);
+    box-shadow: 0 0 20px 0 rgba(0, 166, 87, 0.3);
+    color: #fff;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 12px;
+    font-weight: 800;
+    display: inline-block;
+    line-height: 19px;
+  }
+
+  .timeline-title { font-size: 17px; font-weight: 800; margin: 10px 0; color: #fff; line-height: 18px; color: #E8EDF2; }
+  .timeline-text { font-size: 14px; color: #7A90A8; line-height: 22px;}
+
+  /* MOBILE VIEW CHANGES (Screenshot Match) */
+  @media (max-width: 768px) {
+    .timeline-main-heading {
+        font-size: 32px;
+        line-height: 35px;
+        max-width: 270px;
+        margin-top: 5px;
+    }
+    .timeline-wrapper::before { left: 20px; transform: none; }
+    
+    .timeline-item { 
+      flex-direction: column !important; 
+      align-items: flex-start; 
+      margin-left: 45px; 
+      margin-bottom: 50px; 
+      width: auto; 
+    }
+
+    .timeline-dot { left: -25px; transform: none; }
+
+    .timeline-content-side, 
+    .timeline-badge-side { 
+      width: 100% !important; 
+      text-align: left !important; 
+      padding: 0 !important; 
+      justify-content: flex-start !important;
+    }
+
+    /* Mobile Order: Badge then Content */
+    .timeline-item { display: flex; flex-direction: column; }
+    
+    /* Odd items (Desktop Right) need order fix for mobile */
+    .timeline-item:nth-child(odd) .timeline-badge-side { order: 1; margin-bottom: 10px; }
+    .timeline-item:nth-child(odd) .timeline-content-side { order: 2; }
+    
+    /* Even items (Desktop Left) need order fix for mobile */
+    .timeline-item:nth-child(even) .timeline-badge-side { order: 1; margin-bottom: 10px; }
+    .timeline-item:nth-child(even) .timeline-content-side { order: 2; }
+    
+    /* Specifically to match alternating badge position like screenshot */
+    .timeline-item:nth-child(even) .timeline-content-side { display: flex; flex-direction: column; }
+    .timeline-item:nth-child(even) .timeline-title { order: 1; }
+    .timeline-item:nth-child(even) .timeline-text { order: 2; }
+    .timeline-item:nth-child(even) .timeline-badge-side { order: 3; margin-top: 15px; margin-bottom: 0; }
+  }
+{%- endstyle -%}
+
+<section class="timeline-section-{{ section.id }}">
+  <div class="timeline-container">
+    
+    <div class="timeline-header">
+      {% if section.settings.top_text != blank %}
+        <span class="timeline-top-label">{{ section.settings.top_text }}</span>
+      {% endif %}
+      <h2 class="timeline-main-heading">{{ section.settings.heading }}</h2>
+      <p class="timeline-description">{{ section.settings.description }}</p>
+    </div>
+
+    <div class="timeline-wrapper">
+      {% for block in section.blocks %}
+        <div class="timeline-item" {{ block.shopify_attributes }}>
+          <div class="timeline-dot"></div>
+          
+          <div class="timeline-content-side">
+            <h3 class="timeline-title">{{ block.settings.title }}</h3>
+            <div class="timeline-text">{{ block.settings.text }}</div>
+          </div>
+          
+          <div class="timeline-badge-side">
+            <span class="timeline-badge">{{ block.settings.badge_text }}</span>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+
+  {% if section.settings.watermark != blank %}
+    <div class="timeline-watermark">{{ section.settings.watermark }}</div>
+  {% endif %}
+</section>
+
+{% schema %}
+{
+  "name": "Structure Timeline V2",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#001a33" },
+    { "type": "text", "id": "top_text", "label": "Top Small Text", "default": "THE JOURNEY" },
+    { "type": "text", "id": "heading", "label": "Heading", "default": "25 Years of Clinical Practice" },
+    { "type": "textarea", "id": "description", "label": "Description" },
+    { "type": "text", "id": "watermark", "label": "Watermark Text", "default": "DPM" }
+  ],
+  "blocks": [
+    {
+      "type": "event",
+      "name": "Timeline Event",
+      "settings": [
+        { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "Education" },
+        { "type": "text", "id": "title", "label": "Event Title", "default": "Doctor of Podiatric Medicine" },
+        { "type": "richtext", "id": "text", "label": "Description", "default": "<p>Description details go here.</p>" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Structure Timeline V2",
+      "blocks": [ { "type": "event" }, { "type": "event" } ]
+    }
+  ]
+}
+{% endschema %}
