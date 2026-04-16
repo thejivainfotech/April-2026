@@ -1,0 +1,229 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .testimonials-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (max-width: 750px) {
+    .testimonials-section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    }
+  }
+
+  .testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  
+  .testimonials-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 60px;
+  }
+  .testimonials-title h2 {
+    font-size: 56px;
+    font-weight: 800;
+    line-height: 62px;
+    margin: 10px 0;
+    color: #01203F;
+    max-width: 450px;
+  }
+  .testimonials-title p{
+    font-size: 11px;
+    color: #00A657;
+    letter-spacing: 2px;
+    font-weight: 600;
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  a.testi-read {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #00A657;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 22px;
+ }
+ .badge.testi_badge {
+    width: fit-content;
+    padding: 5px 10px;
+    font-size: 10px;
+    letter-spacing: 1px;
+ }
+  @media (max-width: 768px) {
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .testimonials-header { flex-direction: column; align-items: flex-start; }
+    .testimonials-title h2 {
+        font-size: 32px;
+        line-height: 35px;
+        max-width: 300px;
+        margin-bottom: 20px;
+    }
+  }
+  .testimonial-card {
+    background: #fff;
+    border-radius: 28px;
+    padding: 32px;
+    border: 1px solid #D8DCE2;
+    display: flex;
+    flex-direction: column;
+  }
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+    align-items: center;
+  }
+  .user-info { display: flex; align-items: center; gap: 15px; }
+  .user-avatar {
+    width: 45px;
+    height: 45px;
+    background: #E6F7EE;
+    padding: 10px;
+    border-radius: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: #008A48;
+  }
+  .user-details h4 {
+     margin: 0;
+     font-size: 14px;
+     font-weight: 700;
+     color: #01203F;
+    }
+  .user-details p { 
+    margin: 0; 
+    font-size: 12px; 
+    line-height: 18px;
+    color: #6A7585; 
+    margin-top: 5px;
+  }
+  .badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+  }
+  .testimonial-text { 
+    font-size: 14px; 
+    line-height: 1.6; 
+    color: #333; 
+    line-height: 25px;
+    }
+{%- endstyle -%}
+
+<section class="testimonials-section-{{ section.id }}">
+  <div class="testimonials-container">
+    <div class="testimonials-header">
+      <div class="testimonials-title">
+        <p>{{ section.settings.sub_title }}</p>
+        <h2>{{ section.settings.title }}</h2>
+      </div>
+      <a href="{{ section.settings.link_url }}" class="testi-read">
+        Read All Reviews
+        <span><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3.33325 8H12.6666" stroke="#00A657" stroke-width="1.33333"/>
+            <path d="M8 3.3335L12.6667 8.00016L8 12.6668" stroke="#00A657" stroke-width="1.33333"/>
+            </svg></span>
+      </a>
+    </div>
+
+    <div class="testimonials-grid">
+      {% for block in section.blocks %}
+        <div class="testimonial-card">
+          <div class="card-top">
+            <div class="user-info">
+              <div class="user-avatar">{{ block.settings.initials }}</div>
+              <div class="user-details">
+                <h4>{{ block.settings.name }}</h4>
+                <p>{{ block.settings.subtext }}</p>
+              </div>
+            </div>
+            <div class="stars" style="color: #ffb400;"><svg width="69" height="13" viewBox="0 0 69 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6.49992 1.0835L8.17367 4.47433L11.9166 5.02141L9.20825 7.65933L9.84742 11.386L6.49992 9.62558L3.15242 11.386L3.79159 7.65933L1.08325 5.02141L4.82617 4.47433L6.49992 1.0835Z" fill="#D4A82A"/>
+<path d="M20.4999 1.0835L22.1737 4.47433L25.9166 5.02141L23.2083 7.65933L23.8474 11.386L20.4999 9.62558L17.1524 11.386L17.7916 7.65933L15.0833 5.02141L18.8262 4.47433L20.4999 1.0835Z" fill="#D4A82A"/>
+<path d="M34.4999 1.0835L36.1737 4.47433L39.9166 5.02141L37.2083 7.65933L37.8474 11.386L34.4999 9.62558L31.1524 11.386L31.7916 7.65933L29.0833 5.02141L32.8262 4.47433L34.4999 1.0835Z" fill="#D4A82A"/>
+<path d="M48.4999 1.0835L50.1737 4.47433L53.9166 5.02141L51.2083 7.65933L51.8474 11.386L48.4999 9.62558L45.1524 11.386L45.7916 7.65933L43.0833 5.02141L46.8262 4.47433L48.4999 1.0835Z" fill="#D4A82A"/>
+<path d="M62.4999 1.0835L64.1737 4.47433L67.9166 5.02141L65.2083 7.65933L65.8474 11.386L62.4999 9.62558L59.1524 11.386L59.7916 7.65933L57.0833 5.02141L60.8262 4.47433L62.4999 1.0835Z" fill="#D4A82A"/>
+</svg>
+</div>
+          </div>
+          
+          <div class="badge testi_badge" style="background: {{ block.settings.badge_bg }}; color: {{ block.settings.badge_color }};">
+            {{ block.settings.badge_text }}
+          </div>
+
+          <div class="testimonial-text">
+            {{ block.settings.review_text }}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Custom Testimonials",
+  "settings": [
+    { "type": "header", "content": "Content Settings" },
+    { "type": "text", "id": "sub_title", "label": "Sub Title", "default": "REAL PATIENTS. REAL RESULTS." },
+    { "type": "text", "id": "title", "label": "Main Title", "default": "What Structure Feels Like" },
+    { "type": "url", "id": "link_url", "label": "Link URL" },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f9f8f4" },
+    { "type": "header", "content": "Section Padding" },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    }
+  ],
+  "blocks": [
+    {
+      "type": "testimonial",
+      "name": "Testimonial",
+      "settings": [
+        { "type": "text", "id": "initials", "label": "Initials (e.g. SR)", "default": "SR" },
+        { "type": "text", "id": "name", "label": "Name", "default": "Sarah R." },
+        { "type": "text", "id": "subtext", "label": "Role/Subtext", "default": "ICU Nurse" },
+        { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "HEALTHCARE WORKER" },
+        { "type": "color", "id": "badge_bg", "label": "Badge Background", "default": "#f0fdf4" },
+        { "type": "color", "id": "badge_color", "label": "Badge Text Color", "default": "#16a34a" },
+        { "type": "richtext", "id": "review_text", "label": "Review Text" }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Custom Testimonials" }]
+}
+{% endschema %}
