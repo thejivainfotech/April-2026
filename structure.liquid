@@ -1,0 +1,251 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  #Section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  .structure-section {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  .structure-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    align-items: center;
+  }
+  .structure-content {
+    flex: 1.2;
+    min-width: 320px;
+  }
+  .structure-content .subheading {
+    color: #00A657;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 1.5px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    display: block;
+  }
+  .structure-content h2 {
+    font-size: 48px;
+    color: #01203F;
+    margin: 0 0 25px 0;
+    line-height: 1.1;
+    font-weight: 800;
+  }
+  .structure-content .desc-text {
+    color: #3A4554;
+    line-height: 1.6;
+    font-size: 16px;
+    margin-bottom: 25px;
+  }
+  .structure-checklist {
+    list-style: none;
+    padding: 0;
+    margin: 30px 0 0 0;
+  }
+  .structure-checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+    color: #01203F;
+    font-size: 15px;
+    line-height: 1.4;
+  }
+  .structure-checklist li svg {
+    flex-shrink: 0;
+    background: #E6F7EE;
+    padding: 4px;
+    border-radius: 4px;
+  }
+  
+  /* Visuals Section - Right Side */
+  .structure-visuals {
+    flex: 1;
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+  }
+  .structure-image-wrapper {
+    flex: 1;
+    border-radius: 24px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 4 / 5; /* Makes both images uniform height */
+  }
+  .structure-image-wrapper img, 
+  .structure-image-wrapper svg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 990px) {
+    .structure-container { flex-direction: column; }
+    .structure-content h2 { font-size: 32px; max-width: 300px; }
+    .structure-visuals { width: 100%; }
+    #Section-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top | times: 0.6 | round: 0 }}px;
+      padding-bottom: {{ section.settings.padding_bottom | times: 0.6 | round: 0 }}px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="Section-{{ section.id }}" class="structure-section">
+  <div class="structure-container">
+    <div class="structure-content">
+      {% if section.settings.subheading != blank %}
+        <span class="subheading">{{ section.settings.subheading }}</span>
+      {% endif %}
+      
+      <h2>{{ section.settings.title }}</h2>
+      
+      <div class="desc-text">
+        {{ section.settings.description }}
+      </div>
+      
+      <ul class="structure-checklist">
+        {% for block in section.blocks %}
+          <li {{ block.shopify_attributes }}>
+            <svg width="24" height="24" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M18.6668 10.5L12.2502 16.9167L9.3335 14" stroke="#00A657" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span><strong>{{ block.settings.item_title }}</strong> {{ block.settings.item_text }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="structure-visuals">
+      <div class="structure-image-wrapper">
+        {% if section.settings.card_1_img != blank %}
+          {{ section.settings.card_1_img | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+
+      <div class="structure-image-wrapper">
+        {% if section.settings.card_2_img != blank %}
+          {{ section.settings.card_2_img | image_url: width: 800 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Structure Section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Layout & Design"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f9f9f7"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "THE CLINICAL APPROACH"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Why Structure — Not Foam"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Every drugstore insole you've ever bought works the same way: a piece of foam between your foot and the ground...</p>"
+    },
+    {
+      "type": "header",
+      "content": "Images (Right Side)"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_1_img",
+      "label": "First Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "card_2_img",
+      "label": "Second Image"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "checklist_item",
+      "name": "Checklist Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "item_title",
+          "label": "Bold Text",
+          "default": "Rigid shell distributes force"
+        },
+        {
+          "type": "text",
+          "id": "item_text",
+          "label": "Normal Text",
+          "default": "across the entire arch."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Structure Section",
+      "blocks": [
+        { "type": "checklist_item" },
+        { "type": "checklist_item" },
+        { "type": "checklist_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
