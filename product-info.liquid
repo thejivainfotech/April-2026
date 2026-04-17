@@ -1,0 +1,302 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .pi-section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  @media screen and (min-width: 750px) {
+    .pi-section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  /* Watermark Styling */
+  .pi-watermark-{{ section.id }} {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    font-size: {{ section.settings.watermark_size }}px;
+    font-weight: 900;
+    color: {{ section.settings.watermark_color }};
+    opacity: {{ section.settings.watermark_opacity }};
+    text-transform: uppercase;
+    line-height: 1;
+    z-index: 1;
+    pointer-events: none;
+    white-space: nowrap;
+    font-family: sans-serif;
+  }
+
+  .pi-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .pi-image-side {
+    flex: 1;
+    min-width: 300px;
+  }
+
+  .pi-image-wrapper {
+    display: flex;
+    justify-content: center;
+  }
+
+  .pi-image-wrapper img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+
+ .pi-content-side {
+    flex: 1;
+    padding: 40px 0px 0px 40px;
+    min-width: 350px;
+}
+
+  .pi-sub-heading {
+    color: #00A657;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-size: 11px;
+    letter-spacing: 1.96px;
+    display: block;
+  }
+
+  .pi-main-heading {
+    font-size: 56px;
+    color: #01203F;
+    line-height: 61px;
+    margin-top: 10px;
+    margin-bottom: 15px;
+    font-weight: 800;
+  }
+
+  .pi-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+
+  .pi-info-item {
+    background: #FAFAF8;
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid #D8DCE2;
+    display: flex;
+    gap: 15px;
+  }
+
+  .pi-check-icon {
+    width: 22px;
+    height: 22px;
+    background: #e6f7ec;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #28a745;
+    font-size: 12px;
+    flex-shrink: 0;
+  }
+
+  .pi-item-title {
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 18px;
+    color: #01203F;
+    margin-bottom: 5px;
+  }
+
+  .pi-item-desc {
+    font-size: 13px;
+    color: #3A4554;
+    line-height: 17.92px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .pi-info-grid { grid-template-columns: 1fr; }
+    .pi-main-heading { font-size: 32px; line-height: 35.2px; margin-bottom: 30px;}
+    .pi-content-side { padding: 30px 0 0 0; }
+    .pi-container { padding-inline: 20px;}
+    .pi-watermark-{{ section.id }} { font-size: 100px; bottom: -50px; }
+  }
+{%- endstyle -%}
+
+<section class="pi-section-{{ section.id }}-padding">
+  {% if section.settings.watermark_text != blank %}
+    <div class="pi-watermark-{{ section.id }}">{{ section.settings.watermark_text }}</div>
+  {% endif %}
+
+  <div class="pi-container">
+    <div class="pi-image-side">
+      <div class="pi-image-wrapper">
+        {% if section.settings.main_image != blank %}
+          {{ section.settings.main_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        {% else %}
+          {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+      </div>
+    </div>
+
+    <div class="pi-content-side">
+      {% if section.settings.sub_title != blank %}
+        <span class="pi-sub-heading">{{ section.settings.sub_title }}</span>
+      {% endif %}
+      
+      <h2 class="pi-main-heading">{{ section.settings.heading }}</h2>
+      
+      <div class="pi-info-grid">
+        {% for block in section.blocks %}
+          <div class="pi-info-item" {{ block.shopify_attributes }}>
+            <div class="pi-check-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="24" height="24" rx="6" fill="#E6F7EE"/>
+                <path d="M16 9L10.5 14.5L8 12" stroke="#008A48"/>
+                </svg>
+            </div>
+            <div class="pi-item-text">
+              <div class="pi-item-title">{{ block.settings.title }}</div>
+              <div class="pi-item-desc">{{ block.settings.description }}</div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "PI Dynamic Info Grid",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "main_image",
+      "label": "Main Left Image"
+    },
+    {
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Heading",
+      "default": "EVERYTHING YOU NEED"
+    },
+    {
+      "type": "textarea",
+      "id": "heading",
+      "label": "Main Heading",
+      "default": "Here's Exactly What Shows Up"
+    },
+    {
+      "type": "header",
+      "content": "Watermark Settings"
+    },
+    {
+      "type": "text",
+      "id": "watermark_text",
+      "label": "Watermark Text",
+      "default": "INBOX"
+    },
+    {
+      "type": "color",
+      "id": "watermark_color",
+      "label": "Watermark Color",
+      "default": "#f0f0f0"
+    },
+    {
+      "type": "range",
+      "id": "watermark_size",
+      "min": 50,
+      "max": 400,
+      "step": 10,
+      "unit": "px",
+      "label": "Watermark Font Size",
+      "default": 180
+    },
+    {
+      "type": "range",
+      "id": "watermark_opacity",
+      "min": 0,
+      "max": 1,
+      "step": 0.1,
+      "label": "Watermark Opacity",
+      "default": 0.4
+    },
+    {
+      "type": "header",
+      "content": "Section Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "info_item",
+      "name": "Info Block",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Feature Name"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description",
+          "default": "Short description goes here."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "PI Dynamic Info Grid",
+      "blocks": [
+        { "type": "info_item" },
+        { "type": "info_item" },
+        { "type": "info_item" },
+        { "type": "info_item" },
+        { "type": "info_item" },
+        { "type": "info_item" }
+      ]
+    }
+  ]
+}
+{% endschema %}
