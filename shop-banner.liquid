@@ -1,0 +1,272 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .shop-banner-{{ section.id }} {
+    position: relative;
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    text-align: center;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+    z-index: 1;
+  }
+
+  .shop-banner-{{ section.id }} .watermark {
+    position: absolute;
+    bottom: -15%;
+    right: -2%;
+    font-size: 220px;
+    font-weight: 900;
+    color: #FFFFFF03;
+    line-height: 320px;
+    user-select: none;
+    pointer-events: none;
+    z-index: -1;
+    text-transform: uppercase;
+  }
+
+  .shop-banner-{{ section.id }} .content-container {
+    position: relative;
+    z-index: 10;
+    max-width: 1000px;
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  .shop-banner-{{ section.id }} .badge-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 19px;
+    color: #7A90A8;
+    margin-bottom: 25px;
+  }
+
+  .shop-banner-{{ section.id }} .glow-dot {
+    height: 7px; width: 7px;
+    background-color: #00A657;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #00A657;
+  }
+
+  .shop-banner-{{ section.id }} .banner-title {
+    font-size: 64px;
+    line-height: 70px;
+    margin: 0 0 20px 0;
+    color: #E8EDF2;
+    font-weight: 800;
+  }
+
+  .shop-banner-{{ section.id }} .banner-title span {
+    background: linear-gradient(138deg, #00A657, #00AEEC);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  .shop-banner-{{ section.id }} .banner-description {
+    font-size: 18px;
+    line-height: 30px;
+    color: #7A90A8;
+    margin-inline: auto;
+    margin-bottom: 40px;
+    max-width: 570px;
+  }
+
+  /* Buttons Wrapper */
+  .shop-banner-{{ section.id }} .button-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+  }
+
+  .shop-banner-{{ section.id }} .feature-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50px;
+    color: #7A90A8;
+    text-decoration: none;
+    font-size: 12px;
+    background: rgba(255, 255, 255, 0.03);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    font-weight: 600;
+    line-height: 20px;
+  }
+
+  .shop-banner-{{ section.id }} .feature-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .shop-banner-{{ section.id }} {
+      padding-top: {{ section.settings.padding_top_mobile }}px;
+      padding-bottom: {{ section.settings.padding_bottom_mobile }}px;
+    }
+    .shop-banner-{{ section.id }} .button-list {
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+    }
+    .shop-banner-{{ section.id }} .feature-btn {
+      width: fit-content;
+      max-width: 350px;
+      justify-content: center;
+    }
+     .shop-banner-{{ section.id }} .banner-title {
+        font-size: 32px;
+        line-height: 35px;
+    }
+  }
+{%- endstyle -%}
+
+<section class="shop-banner-{{ section.id }}">
+  {% if section.settings.watermark_text != blank %}
+    <div class="watermark">{{ section.settings.watermark_text }}</div>
+  {% endif %}
+
+  <div class="content-container">
+    {% if section.settings.badge_text != blank %}
+      <div class="badge-text">
+        <span class="glow-dot"></span>
+        {{ section.settings.badge_text }}
+      </div>
+    {% endif %}
+
+    <h2 class="banner-title">
+      {{ section.settings.title_white }} <span>{{ section.settings.title_accent }}</span>
+    </h2>
+
+    {% if section.settings.description != blank %}
+      <p class="banner-description">{{ section.settings.description }}</p>
+    {% endif %}
+
+    <div class="button-list">
+      {% for block in section.blocks %}
+        <a href="{{ block.settings.link }}" class="feature-btn">
+          {% if block.settings.icon_svg != blank %}
+             {{ block.settings.icon_svg }}
+          {% endif %}
+          {{ block.settings.btn_text }}
+        </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Spacing (Padding)"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0, "max": 200, "step": 10, "unit": "px", "label": "Top Padding (Desktop)", "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0, "max": 200, "step": 10, "unit": "px", "label": "Bottom Padding (Desktop)", "default": 100
+    },
+    {
+      "type": "range",
+      "id": "padding_top_mobile",
+      "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Top Padding (Mobile)", "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom_mobile",
+      "min": 0, "max": 150, "step": 5, "unit": "px", "label": "Bottom Padding (Mobile)", "default": 60
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#001a2d"
+    },
+    {
+      "type": "text",
+      "id": "watermark_text",
+      "label": "Watermark Text",
+      "default": "SHOP"
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "Every product designed by Dr. Mitchell Wachtel..."
+    },
+    {
+      "type": "text",
+      "id": "title_white",
+      "label": "Title (White)",
+      "default": "Find"
+    },
+    {
+      "type": "text",
+      "id": "title_accent",
+      "label": "Title (Colored)",
+      "default": "Your Fix"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Podiatrist-designed structural orthotics..."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "button",
+      "name": "Feature Button",
+      "settings": [
+        {
+          "type": "text",
+          "id": "btn_text",
+          "label": "Button Text",
+          "default": "I need everyday support"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "html",
+          "id": "icon_svg",
+          "label": "Icon SVG Code",
+          "info": "SVG code paste karein"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop Banner",
+      "blocks": [
+        { "type": "button" },
+        { "type": "button" },
+        { "type": "button" }
+      ]
+    }
+  ]
+}
+{% endschema %}
