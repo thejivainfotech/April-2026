@@ -1,0 +1,146 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .ortho-testimonial-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding: 60px 20px;
+    text-align: center;
+    color: {{ section.settings.text_color }};
+  }
+  .ortho-testimonial-container {
+    max-width: 750px;
+    margin: 0 auto;
+  }
+  .ortho-stars {
+    color: {{ section.settings.star_color }};
+    font-size: 22px;
+    margin-bottom: 15px;
+    display: block;
+  }
+  .ortho-quote {
+    font-family: 'Plus Jakarta Sans';
+    line-height: 40px;
+    font-weight: 300;
+    margin-bottom: 15px;
+    letter-spacing: 0.5px;
+    text-transform: Italic;
+    color: #E8EDF2;
+  }
+ .ortho-quote h5 {
+    font-size: 26px;
+    line-height: 40px;
+}
+  /* Bold text styling for the highlight part */
+  .ortho-quote strong {
+    font-weight: 700;
+    color: {{ section.settings.text_color }};
+  }
+  .ortho-author {
+    font-size: 13px;
+    color: #7A90A8;
+  }
+  .ortho-author span {
+    font-weight: 700;
+    color: #E8EDF2;
+  }
+ .ortho-stars svg {
+    width: 110px;
+    margin: auto;
+  }
+  @media (max-width: 768px) {
+    .ortho-testimonial-{{ section.id }} {
+      padding: 40px 15px;
+    }
+    .ortho-quote {
+      font-size: 18px;
+    }
+    .ortho-quote h5 {
+    font-size: 18px;
+    line-height: 28px;
+    }
+    .ortho-stars svg {
+      width: 110px;
+      margin: auto;
+    }
+  }
+{%- endstyle -%}
+
+<section class="ortho-testimonial-{{ section.id }}" data-section-id="{{ section.id }}">
+  <div class="ortho-testimonial-container">
+    
+    {%- if section.settings.show_stars -%}
+      <div class="ortho-stars">
+    <div class="ortho-stars">
+  <svg viewBox="340 0 100 18" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+    <path d="M350 1.5L352.318 6.195L357.5 6.9525L353.75 10.605L354.635 15.765L350 13.3275L345.365 15.765L346.25 10.605L342.5 6.9525L347.682 6.195L350 1.5Z" fill="#D4A82A"/>
+    <path d="M370 1.5L372.318 6.195L377.5 6.9525L373.75 10.605L374.635 15.765L370 13.3275L365.365 15.765L366.25 10.605L362.5 6.9525L367.682 6.195L370 1.5Z" fill="#D4A82A"/>
+    <path d="M390 1.5L392.318 6.195L397.5 6.9525L393.75 10.605L394.635 15.765L390 13.3275L385.365 15.765L386.25 10.605L382.5 6.9525L387.682 6.195L390 1.5Z" fill="#D4A82A"/>
+    <path d="M410 1.5L412.318 6.195L417.5 6.9525L413.75 10.605L414.635 15.765L410 13.3275L405.365 15.765L406.25 10.605L402.5 6.9525L407.682 6.195L410 1.5Z" fill="#D4A82A"/>
+    <path d="M430 1.5L432.318 6.195L437.5 6.9525L433.75 10.605L434.635 15.765L430 13.3275L425.365 15.765L426.25 10.605L422.5 6.9525L427.682 6.195L430 1.5Z" fill="#D4A82A"/>
+  </svg>
+</div>
+      </div>
+    {%- endif -%}
+
+    <div class="ortho-quote">
+      <h5>{{ section.settings.testimonial_text }}</h5>
+    </div>
+
+    <div class="ortho-author">
+      <span>{{ section.settings.author_name }}</span> 
+      {% if section.settings.author_details != blank %}
+        — {{ section.settings.author_details }}
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ortho Testimonial",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#051d33"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_stars",
+      "label": "Show Stars",
+      "default": true
+    },
+    {
+      "type": "richtext",
+      "id": "testimonial_text",
+      "label": "Testimonial Text",
+      "default": "<p>\"I stopped walking my granddaughter to school because my feet couldn't handle 4 blocks. <strong>We walked to school together last week — first time in over a year.</strong>\"</p>"
+    },
+    {
+      "type": "text",
+      "id": "author_name",
+      "label": "Author Name",
+      "default": "Helen M."
+    },
+    {
+      "type": "text",
+      "id": "author_details",
+      "label": "Author Sub-details",
+      "default": "Retired Teacher - Age 72"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ortho Testimonial"
+    }
+  ]
+}
+{% endschema %}
