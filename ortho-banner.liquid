@@ -1,0 +1,433 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{% schema %}
+{
+  "name": "Ortho Hero Banner",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Text Content"
+    },
+    {
+      "type": "text",
+      "id": "top_label",
+      "label": "Top Label",
+      "default": "FROM DR. WACHTEL'S PRACTICE TO YOUR DOOR"
+    },
+    {
+      "type": "text",
+      "id": "heading_1",
+      "label": "Heading Line 1",
+      "default": "You've Spent Hundreds on Insoles That Failed."
+    },
+    {
+      "type": "text",
+      "id": "heading_2",
+      "label": "Heading Line 2 (Gradient)",
+      "default": "This One Won't."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "A board-certified podiatrist with 25 years of clinical experience personally reviews your foot impressions — then builds you the exact same rigid structural orthotic he'd prescribe in his office. Mailed to your door. No appointments. No $700 invoice."
+    },
+    {
+      "type": "header",
+      "content": "Pricing & Klarna"
+    },
+    {
+      "type": "text",
+      "id": "price",
+      "label": "Price",
+      "default": "$299.99"
+    },
+    {
+      "type": "text",
+      "id": "price_subtext",
+      "label": "Price Subtext",
+      "default": "vs. $400-700+ in-office"
+    },
+    {
+      "type": "text",
+      "id": "daily_cost",
+      "label": "Daily Cost Highlight",
+      "default": "$0.82/day"
+    },
+    {
+      "type": "text",
+      "id": "hsa_text",
+      "label": "HSA/FSA Text",
+      "default": "FSA/HSA Eligible"
+    },
+    {
+      "type": "text",
+      "id": "klarna_text",
+      "label": "Klarna Text",
+      "default": "or 4× $75 with Klarna"
+    },
+    {
+      "type": "header",
+      "content": "Media & Doctor Info"
+    },
+    {
+      "type": "image_picker",
+      "id": "hero_image",
+      "label": "Banner Image"
+    },
+    {
+      "type": "text",
+      "id": "doctor_name",
+      "label": "Doctor Name",
+      "default": "Dr. Mitchell Wachtel, DPM"
+    },
+    {
+      "type": "text",
+      "id": "doctor_title",
+      "label": "Doctor Subtitle",
+      "default": "Reviews Every Impression. Personally."
+    },
+    {
+      "type": "header",
+      "content": "Buttons & Contact"
+    },
+    {
+      "type": "text",
+      "id": "btn1_text",
+      "label": "Primary Button",
+      "default": "Get Your Impression Kit"
+    },
+    {
+      "type": "url",
+      "id": "btn1_link",
+      "label": "Primary Link"
+    },
+    {
+      "type": "text",
+      "id": "btn2_text",
+      "label": "Secondary Button",
+      "default": "See How It Works"
+    },
+    {
+      "type": "url",
+      "id": "btn2_link",
+      "label": "Secondary Link"
+    },
+    {
+      "type": "text",
+      "id": "phone_number",
+      "label": "Phone Number",
+      "default": "(978) 837-9705"
+    },
+    {
+      "type": "header",
+      "content": "Style & Spacing"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#061a2e"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "label": "Padding Top"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 150,
+      "step": 5,
+      "default": 80,
+      "label": "Padding Bottom"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "guarantee_item",
+      "name": "Guarantee Item",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "List Text",
+          "default": "Free shipping both ways"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Item Link (Optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ortho Hero Banner",
+      "blocks": [
+        { "type": "guarantee_item", "settings": { "text": "Free shipping both ways" } },
+        { "type": "guarantee_item", "settings": { "text": "90-day fit guarantee" } },
+        { "type": "guarantee_item", "settings": { "text": "Free adjustments if needed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
+<section class="ortban-wrapper" style="background: {{ section.settings.bg_color }}; padding-top: {{ section.settings.padding_top }}px; padding-bottom: {{ section.settings.padding_bottom }}px;">
+  <div class="ortban-watermark">CUSTOM</div>
+
+  <div class="ortban-container">
+    
+    <div class="ortban-content">
+      {% if section.settings.top_label != blank %}
+        <div class="ortban-label">
+          <span class="ortban-dotd">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g filter="url(#filter0_d_23_15300)">
+                <rect x="10" y="10" width="8" height="8" rx="4" fill="#00AEEC"/>
+              </g>
+              <defs>
+                <filter id="filter0_d_23_15300" x="0" y="0" width="28" height="28" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                  <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+                  <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+                  <feOffset/>
+                  <feGaussianBlur stdDeviation="5"/>
+                  <feComposite in2="hardAlpha" operator="out"/>
+                  <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.682353 0 0 0 0 0.92549 0 0 0 1 0"/>
+                  <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_23_15300"/>
+                  <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_23_15300" result="shape"/>
+                </filter>
+              </defs>
+            </svg>
+          </span> {{ section.settings.top_label }}
+        </div>
+      {% endif %}
+
+      <h1 class="ortban-title">
+        <span class="ortban-white">{{ section.settings.heading_1 }}</span><br>
+        <span class="ortban-gradient">{{ section.settings.heading_2 }}</span>
+      </h1>
+
+      <p class="ortban-text">{{ section.settings.description }}</p>
+
+      <div class="ortban-pricing-block">
+        <div class="ortban-pricing-main-row">
+          <span class="ortban-price-amount">{{ section.settings.price }}</span>
+          <span class="ortban-price-comparison">{{ section.settings.price_subtext }} <span class="ortban-daily-highlight">{{ section.settings.daily_cost }}</span></span>
+        </div>
+        <div class="ortban-pricing-sub-row">
+          <span class="ortban-badge-hsa">{{ section.settings.hsa_text }}</span>
+          <span class="ortban-klarna-text">{{ section.settings.klarna_text }}</span>
+        </div>
+      </div>
+
+      <div class="ortban-actions">
+        <div class="ortban-button-group">
+          <a href="{{ section.settings.btn1_link }}" class="ortban-btn-primary">{{ section.settings.btn1_text }}</a>
+          <a href="{{ section.settings.btn2_link }}" class="ortban-btn-secondary">{{ section.settings.btn2_text }}</a>
+        </div>
+        
+        <div class="ortban-guarantee-list">
+          {% for block in section.blocks %}
+            {% if block.type == 'guarantee_item' %}
+              <span {{ block.shopify_attributes }}>
+                {% if block.settings.link != blank %}<a href="{{ block.settings.link }}" style="color: inherit; text-decoration: none;">{% endif %}
+                  <span class="ortban-check"><svg width="8" height="7" viewBox="0 0 8 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M7.65755 0.324097L2.61589 5.36576L0.324219 3.0741" stroke="#00AEEC" stroke-width="0.916667"/>
+</svg>
+</span> {{ block.settings.text }}
+                {% if block.settings.link != blank %}</a>{% endif %}
+              </span>
+            {% endif %}
+          {% endfor %}
+
+          {% if section.settings.phone_number != blank %}
+            <span class="ortban-phone">
+              <a href="tel:{{ section.settings.phone_number | replace: ' ', '' | replace: '(', '' | replace: ')', '' | replace: '-', '' }}" style="color: inherit; text-decoration: none; display: flex; align-items: flex-end; gap: 5px;">
+                <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M9.57339 7.29675V8.67175C9.57391 8.7994 9.54777 8.92575 9.49663 9.0427C9.44549 9.15966 9.37049 9.26465 9.27643 9.35094C9.18237 9.43723 9.07132 9.50293 8.9504 9.54383C8.82949 9.58472 8.70136 9.59991 8.57423 9.58842C7.16386 9.43517 5.8091 8.95324 4.61881 8.18134C3.5114 7.47764 2.57251 6.53875 1.86881 5.43134C1.09422 4.23564 0.612173 2.87429 0.461728 1.45759C0.450274 1.33084 0.465337 1.2031 0.505957 1.0825C0.546577 0.961892 0.611865 0.851068 0.697662 0.757078C0.78346 0.663089 0.887889 0.587994 1.0043 0.536574C1.12071 0.485155 1.24655 0.458538 1.37381 0.458418H2.74881C2.97124 0.456229 3.18688 0.534996 3.35554 0.680038C3.52419 0.825079 3.63435 1.0265 3.66548 1.24675C3.72369 1.68675 3.83094 2.11896 3.98631 2.53467C4.04798 2.69872 4.06132 2.877 4.02477 3.04841C3.98821 3.21981 3.90329 3.37714 3.78006 3.50175L3.19798 4.08384C3.85044 5.23129 4.80052 6.18137 5.94798 6.83384L6.53006 6.25175C6.65468 6.12852 6.81201 6.0436 6.98341 6.00704C7.15481 5.97049 7.3331 5.98384 7.49714 6.0455C7.91285 6.20088 8.34506 6.30813 8.78506 6.36634C9.0077 6.39774 9.21104 6.50989 9.35639 6.68144C9.50174 6.85299 9.57897 7.07197 9.57339 7.29675Z" stroke="#00AEEC" stroke-width="0.916667"/>
+                </svg>
+                {{ section.settings.phone_number }}
+              </a>
+            </span>
+          {% endif %}
+        </div>
+      </div>
+
+      <div class="ortban-footer">
+         <div class="ortban-avatar-stack">
+            <span class="ortban-av" style="background: linear-gradient(90deg, #00A657, #00AEEC);">DL</span>
+            <span class="ortban-av" style="background: linear-gradient(90deg, #1F4993, #00AEEC);">JW</span>
+            <span class="ortban-av" style="background: linear-gradient(90deg, #00A657, #1F4993);">RP</span>
+            <span class="ortban-av" style="background: linear-gradient(90deg, #8ED6C2, #00A657);">MK</span>
+            <span class="ortban-av" style="background: linear-gradient(90deg, #1F4993, #8ED6C2);">SR</span>
+         </div>
+         <div class="ortban-rating-info">
+            <div class="ortban-stars"><svg width="466" height="12" viewBox="0 0 466 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M6 1L7.545 4.13L11 4.635L8.5 7.07L9.09 10.51L6 8.885L2.91 10.51L3.5 7.07L1 4.635L4.455 4.13L6 1Z" fill="#D4A82A"/>
+<path d="M19 1L20.545 4.13L24 4.635L21.5 7.07L22.09 10.51L19 8.885L15.91 10.51L16.5 7.07L14 4.635L17.455 4.13L19 1Z" fill="#D4A82A"/>
+<path d="M32 1L33.545 4.13L37 4.635L34.5 7.07L35.09 10.51L32 8.885L28.91 10.51L29.5 7.07L27 4.635L30.455 4.13L32 1Z" fill="#D4A82A"/>
+<path d="M45 1L46.545 4.13L50 4.635L47.5 7.07L48.09 10.51L45 8.885L41.91 10.51L42.5 7.07L40 4.635L43.455 4.13L45 1Z" fill="#D4A82A"/>
+<path d="M58 1L59.545 4.13L63 4.635L60.5 7.07L61.09 10.51L58 8.885L54.91 10.51L55.5 7.07L53 4.635L56.455 4.13L58 1Z" fill="#D4A82A"/>
+</svg>
+</div>
+            <p><strong>4.9/5</strong> <span class="ortho-txtline">from custom orthotic patients ·</span> <strong>Every pair reviewed by Dr. Wachtel personally</strong></p>
+         </div>
+      </div>
+    </div>
+
+    <div class="ortban-media">
+      <div class="ortban-image-card-container">
+        {% if section.settings.hero_image != blank %}
+          <img src="{{ section.settings.hero_image | img_url: '1200x' }}" alt="Doctor Profile" class="ortban-hero-main-img">
+        {% else %}
+           {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {% endif %}
+        
+        <div class="ortban-doctor-float-badge">
+          <div class="ortban-badge-icon">
+             <svg width="94" height="94" viewBox="0 0 94 94" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g filter="url(#filter0_d_23_15378)">
+<rect x="24" y="24" width="46" height="46" rx="23" fill="url(#paint0_linear_23_15378)" shape-rendering="crispEdges"/>
+<path d="M47.0003 56.1667C47.0003 56.1667 54.3337 52.5 54.3337 47V40.5834L47.0003 37.8334L39.667 40.5834V47C39.667 52.5 47.0003 56.1667 47.0003 56.1667Z" stroke="white" stroke-width="1.83333"/>
+</g>
+<defs>
+<filter id="filter0_d_23_15378" x="0" y="0" width="94" height="94" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+<feOffset/>
+<feGaussianBlur stdDeviation="12"/>
+<feComposite in2="hardAlpha" operator="out"/>
+<feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.682353 0 0 0 0 0.92549 0 0 0 0.25 0"/>
+<feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_23_15378"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_23_15378" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_23_15378" x1="24" y1="24" x2="70" y2="70" gradientUnits="userSpaceOnUse">
+<stop stop-color="#00A657"/>
+<stop offset="1" stop-color="#00AEEC"/>
+</linearGradient>
+</defs>
+</svg>
+          </div>
+          <div class="ortban-badge-text">
+            <strong>{{ section.settings.doctor_name }}</strong>
+            <p>{{ section.settings.doctor_title }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+/* Layout Styles */
+.ortban-wrapper { position: relative; color: #ffffff; overflow: hidden; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; z-index: 1; }
+.ortban-container { max-width: 1300px; margin: 0 auto; display: flex; align-items: center; gap: 60px; padding: 0 40px; position: relative; z-index: 2; }
+.ortban-content { flex: 1.4; }
+.ortban-media { flex: 1; }
+
+/* Background Watermark added here */
+.ortban-watermark {
+  position: absolute;
+  bottom: -40px;
+  left: -20px;
+  font-size: 240px;
+  font-weight: 900;
+  color: #FFFFFF04;
+  line-height: 1;
+  pointer-events: none;
+  z-index: 0;
+  user-select: none;
+}
+
+/* Top Label */
+.ortban-label {
+  display: inline-flex; align-items: center; background: #00AEEC0F; border: 1px solid #00AEEC1F;
+  padding: 8px 16px; border-radius: 50px; font-size: 11px; font-weight: 600;
+  color: #7A90A8; margin-bottom: 25px; text-transform: uppercase; letter-spacing: 1.52px;
+}
+
+/* Typography */
+.ortban-title { font-size: clamp(36px, 5vw, 68px); line-height: 1.05; font-weight: 800; margin: 0 0 25px 0; letter-spacing: -1.5px; }
+.ortban-white { font-size: 80px; font-weight: 800; line-height: 88px; color: #E8EDF2; }
+.ortban-gradient { font-size: 80px; font-weight: 500; line-height: 88px; background: linear-gradient(90deg, #00A657, #00AEEC); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.ortban-text { font-size: 18px; color: #7A90A8; line-height: 31px; max-width: 490px; margin-bottom: 35px; }
+
+/* Pricing */
+.ortban-pricing-block { margin-bottom: 35px; }
+.ortban-pricing-main-row { display: flex; align-items: baseline; gap: 15px; margin-bottom: 8px; }
+.ortban-price-comparison { font-size: 14px; line-height: 22px; color: #7A90A8; }
+.ortban-daily-highlight { color: #DBE64C; font-size: 14px; }
+.ortban-pricing-sub-row { display: flex; gap: 50px; align-items: center; }
+.ortban-badge-hsa { color: #DBE64C; font-weight: 700; font-size: 12px; line-height: 19px; text-transform: uppercase; }
+.ortban-klarna-text { color: #7A90A8; font-size: 12px; }
+.ortban-price-amount {
+    font-size: 52px;
+    font-weight: 800;
+    color: #E8EDF2;
+    line-height: 86px;
+}
+
+/* Buttons & Guarantees */
+.ortban-actions { margin-bottom: 45px; }
+.ortban-button-group { display: flex; gap: 15px; margin-bottom: 20px; }
+.ortban-btn-primary { 
+  background: linear-gradient(90deg, #00A657 0%, #00AEEC 100%);
+  border: none;
+  box-shadow: inset 0 1px 0 0 rgba(255, 255, 255, 0.2), 0 2px 12px 0 rgba(0, 166, 87, 0.3);
+  color: #FFFFFF; padding: 15px 38px; border-radius: 60px; letter-spacing: 0.14px; font-weight: 600; text-decoration: none; transition: 0.3s transform; font-size: 14px; 
+}
+.ortban-btn-secondary { border: 1px solid #FFFFFF33; color: #E8EDF2; letter-spacing: 0.14px; padding: 15px 38px; border-radius: 60px; font-weight: 600; text-decoration: none; transition: 0.3s; font-size: 14px; }
+.ortban-btn-primary:hover { transform: translateY(-3px); }
+
+.ortban-guarantee-list { display: flex; gap: 20px; font-size: 11px; color: #7A90A8; flex-wrap: wrap; align-items: center; line-height: 18px; }
+.ortban-guarantee-list .ortban-check { color: #5aa9ff; margin-right: 4px; font-weight: bold; display: inline-flex; }
+.ortban-phone a:hover { color: #5aa9ff; opacity: 1; }
+
+/* Footer Trust */
+.ortban-footer { display: flex; flex-direction: column; gap: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; }
+.ortban-avatar-stack { display: flex; }
+.ortban-av { width: 32px; height: 32px; border-radius: 50%; border: 2.5px solid #061a2e; margin-right: -12px; font-size: 10px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #fff; }
+.ortban-stars { color: #fbbf24; font-size: 14px; margin-bottom: 4px; }
+.ortban-rating-info p { font-size: 12px;  margin: 0; color: #E8EDF2; opacity: 0.9; }
+.ortho-txtline { color: #7A90A8; }
+/* Image Card & Badge */
+.ortban-image-card-container { position: relative; border-radius: 30px; overflow: hidden; box-shadow: 0 30px 60px rgba(0,0,0,0.4); background: #1a2a3a; }
+.ortban-hero-main-img { width: 100%; height: auto; display: block; }
+.ortban-doctor-float-badge {
+  position: absolute; bottom: 20px; left: 20px; right: 20px;
+  background: #01203F59; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-radius: 20px; display: flex; align-items: center; gap: 0px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.ortban-badge-text strong { display: block; font-size: 14px; font-weight: 700; color: #FFFFFF; margin-bottom: 2px; }
+.ortban-badge-text p { font-size: 11px; color: #FFFFFF80; margin: 0; }
+
+/* Responsive Settings */
+@media (max-width: 1024px) {
+  .ortban-container { flex-direction: column-reverse; text-align: center; gap: 50px; padding-inline: 20px; }
+  .ortban-text { margin: 0 auto 35px; text-align: left; }
+  .ortban-pricing-main-row, .ortban-pricing-sub-row, .ortban-button-group, .ortban-guarantee-list, .ortban-footer { justify-content: left; }
+  .ortban-media { width: 100%; max-width: 600px; }
+  .ortban-white, .ortban-gradient { font-size: 44px; line-height: 48px; }
+  .ortban-watermark { font-size: 150px; bottom: 0%; }
+  .ortban-label { text-align: left; gap: 8px; }
+  .ortban-title { text-align: left; font-size: 44px; line-height: 48px; }
+  .ortban-rating-info p { text-align: left; }
+}
+
+@media (max-width: 767px) {
+  .ortban-button-group { flex-direction: column; }
+  .ortban-price-amount { font-size: 44px; }
+  .ortban-pricing-main-row { flex-direction: column; align-items: left; gap: 5px; }
+  .ortban-watermark { font-size: 100px; }
+}
+</style>
