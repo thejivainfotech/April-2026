@@ -1,0 +1,246 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .orth-comparison-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    color: #ffffff;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .orth-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .orth-sub-heading {
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 12px;
+    opacity: 0.8;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .orth-main-heading {
+    font-size: clamp(28px, 5vw, 42px);
+    line-height: 1.2;
+    margin-bottom: 20px;
+    font-weight: 700;
+  }
+
+  .orth-description {
+    max-width: 750px;
+    margin: 0 auto 45px auto;
+    opacity: 0.75;
+    line-height: 1.6;
+    font-size: 16px;
+  }
+
+  /* Table Styling */
+  .orth-table-wrapper {
+    overflow-x: auto;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .orth-table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 850px;
+  }
+
+  .orth-table th, .orth-table td {
+    padding: 18px 15px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .orth-table th {
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: #a0a0a0;
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  /* Highlight Last Column (Your Brand) */
+  .orth-table th:last-child, 
+  .orth-table td:last-child {
+    background: rgba(0, 255, 200, 0.07);
+    color: #00ffc8;
+    font-weight: 600;
+  }
+
+  .orth-check { 
+    color: #00ffc8; 
+    margin-left: 6px;
+    font-weight: bold;
+  }
+
+  /* Footer Section */
+  .orth-footer-content {
+    margin-top: 45px;
+  }
+
+  .orth-footer-text {
+    font-size: 18px;
+    font-weight: 500;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.4;
+  }
+
+  /* Added Footer Subtext Styling */
+  .orth-footer-subtext {
+    font-size: 14px;
+    opacity: 0.7;
+    max-width: 550px;
+    margin: 10px auto 0 auto;
+    line-height: 1.5;
+  }
+
+  .orth-btn {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, #00c98b 0%, #00b4db 100%);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 201, 139, 0.3);
+  }
+
+  .orth-btn:hover { 
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 201, 139, 0.4);
+  }
+
+  .orth-trust-badges {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 25px;
+    font-size: 13px;
+    opacity: 0.65;
+  }
+{%- endstyle -%}
+
+<section class="orth-comparison-section-{{ section.id }}">
+  <div class="orth-container">
+    {% if section.settings.sub_heading != blank %}
+      <span class="orth-sub-heading">{{ section.settings.sub_heading }}</span>
+    {% endif %}
+    
+    <h2 class="orth-main-heading">{{ section.settings.title }}</h2>
+    <p class="orth-description">{{ section.settings.description }}</p>
+
+    <div class="orth-table-wrapper">
+      <table class="orth-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>{{ section.settings.col_1 }}</th>
+            <th>{{ section.settings.col_2 }}</th>
+            <th>{{ section.settings.col_3 }}</th>
+            <th>{{ section.settings.col_4 }}</th>
+            <th>{{ section.settings.col_brand }}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for block in section.blocks %}
+            <tr {{ block.shopify_attributes }}>
+              <td>{{ block.settings.feature_name }}</td>
+              <td>{{ block.settings.val_1 }}</td>
+              <td>{{ block.settings.val_2 }}</td>
+              <td>{{ block.settings.val_3 }}</td>
+              <td>{{ block.settings.val_4 }}</td>
+              <td>
+                {{ block.settings.val_brand }} 
+                {% if block.settings.show_check %}<span class="orth-check">✓</span>{% endif %}
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="orth-footer-content">
+      <div class="orth-footer-text">{{ section.settings.footer_text }}</div>
+      
+      {% comment %} Added Footer Subtext Logic {% endcomment %}
+      {% if section.settings.footer_subtext != blank %}
+        <div class="orth-footer-subtext">{{ section.settings.footer_subtext }}</div>
+      {% endif %}
+
+      {% if section.settings.btn_label != blank %}
+        <a href="{{ section.settings.btn_link }}" class="orth-btn">{{ section.settings.btn_label }}</a>
+      {% endif %}
+      
+      <div class="orth-trust-badges">
+          <span>✓ 90-day fit guarantee</span>
+          <span>✓ Free adjustments & remakes</span>
+          <span>✓ Secure checkout</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Orthotic Comparison",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#05192d" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Top", "default": 80 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Padding Bottom", "default": 80 },
+    { "type": "text", "id": "sub_heading", "label": "Sub Heading", "default": "SEE WHAT YOU'RE ACTUALLY PAYING FOR" },
+    { "type": "textarea", "id": "title", "label": "Main Heading", "default": "The Comparison Nobody Wants You to See" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Five options for custom orthotics. Four of them have a serious problem. One was designed by a podiatrist who puts his name on every pair." },
+    { "type": "header", "content": "Column Headers" },
+    { "type": "text", "id": "col_1", "label": "Column 1", "default": "Drugstore Insoles" },
+    { "type": "text", "id": "col_2", "label": "Column 2", "default": "Good Feet Store" },
+    { "type": "text", "id": "col_3", "label": "Column 3", "default": "Upstep Online" },
+    { "type": "text", "id": "col_4", "label": "Column 4", "default": "Podiatrist Office" },
+    { "type": "text", "id": "col_brand", "label": "Highlight Column (Brand)", "default": "RUN DOC CUSTOM +" },
+    { "type": "header", "content": "Call to Action" },
+    { "type": "textarea", "id": "footer_text", "label": "Footer Text", "default": "Same rigid shell. Same impression method. Same podiatrist review." },
+    { "type": "textarea", "id": "footer_subtext", "label": "Footer Subtext", "default": "Your feet don't care where the box shipped from. They care that a doctor built what's inside." },
+    { "type": "text", "id": "btn_label", "label": "Button Label", "default": "Get Your Impression Kit — $299.99" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" }
+  ],
+  "blocks": [
+    {
+      "type": "row",
+      "name": "Table Row",
+      "settings": [
+        { "type": "text", "id": "feature_name", "label": "Feature Name", "default": "Price" },
+        { "type": "text", "id": "val_1", "label": "Value 1", "default": "$15-50" },
+        { "type": "text", "id": "val_2", "label": "Value 2", "default": "$1,200+" },
+        { "type": "text", "id": "val_3", "label": "Value 3", "default": "$249" },
+        { "type": "text", "id": "val_4", "label": "Value 4", "default": "$400-700" },
+        { "type": "text", "id": "val_brand", "label": "Brand Value", "default": "$299.99" },
+        { "type": "checkbox", "id": "show_check", "label": "Show Checkmark", "default": true }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Orthotic Comparison",
+      "blocks": [
+        { "type": "row", "settings": { "feature_name": "Price", "val_brand": "$299.99" } },
+        { "type": "row", "settings": { "feature_name": "Designed By", "val_brand": "Dr. Wachtel, DPM" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
