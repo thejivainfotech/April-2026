@@ -1,0 +1,284 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .ament-assessment-section-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+
+  .ament-assessment-card {
+    background: #FAFAF8;
+    border-radius: 28px;
+    max-width: 800px;
+    width: 90%;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.03);
+    border: 1px solid #D8DCE2;
+    margin-bottom: 80px;
+  }
+
+  .ament-assessment-card .ament-sub-heading {
+    color: #00A657;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 1.96px;
+    font-size: 11px;
+    line-height: 18px;
+    margin-bottom: 20px;
+    display: block;
+  }
+
+  .ament-assessment-card h2 {
+    font-size: 44px;
+    color: #01203F;
+    margin: 0 auto 10px;
+    line-height: 48px;
+    font-weight: 800;
+    max-width: 530px;
+  }
+
+  .ament-assessment-card p.ament-description {
+    color: #3A4554;
+    font-size: 16px;
+    line-height: 27px;
+    margin-top: 0px;
+    margin-inline: auto;
+    margin-bottom: 35px;
+    max-width: 500px;
+  }
+
+  .ament-assessment-features {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .ament-feature-item {
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 20px;
+    color: #6A7585;
+  }
+
+  .ament-feature-item svg {
+    margin-right: 8px;
+    color: #2fb38e;
+    flex-shrink: 0;
+  }
+
+  .ament-btn-gradient {
+    background: linear-gradient(90deg, #00A657 0%, #00AEEC 100%);
+    color: #FFFFFF !important;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 23px;
+    display: inline-block;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px #00A6574D;
+  }
+
+  .ament-doctor-profile {
+    border-top: 1px solid #E6E9EE;
+    margin-top: 40px;
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .ament-doc-avatar img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  .ament-trust-bar-{{ section.id }} {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 710px;
+    width: 90%;
+  }
+
+  .ament-trust-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .ament-trust-icon-box img, .ament-trust-icon-box svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .ament-trust-text b {
+    display: block;
+    color: #01203F;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .ament-trust-text span {
+    font-size: 11px;
+    color: #6A7585;
+  }
+
+  .ament-doc-info strong {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 21px;
+    color: #01203F;
+    display: block;
+  }
+
+  .ament-doc-info span {
+    font-size: 11px;
+    color: #6A7585;
+  }
+  .ament-doc-info {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  @media (max-width: 768px) {
+    .ament-assessment-card h2 { font-size: 28px; line-height: 30px; }
+    .ament-trust-bar-{{ section.id }} { flex-direction: column; align-items: center; gap: 30px;}
+    .ament-doc-info strong {
+        font-size: 12px;
+        line-height: 21px;
+    }
+    .ament-doc-info {
+        flex-direction: column;
+        align-items: baseline;
+        gap: 0px;
+    }
+    .ament-doc-info span {
+        text-align: left;
+    }
+    .ament-trust-item {
+        justify-content: center;
+    }
+  }
+{%- endstyle -%}
+
+<div class="ament-assessment-section-{{ section.id }}">
+  <div class="ament-assessment-card">
+    <span class="ament-sub-heading">{{ section.settings.sub_heading }}</span>
+    <h2>{{ section.settings.main_heading }}</h2>
+    <p class="ament-description">{{ section.settings.description }}</p>
+
+    <div class="ament-assessment-features">
+      {% if section.settings.feature_1 != blank %}
+        <div class="ament-feature-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#00A657" stroke-width="1.33333"/></svg>
+          {{ section.settings.feature_1 }}
+        </div>
+      {% endif %}
+      {% if section.settings.feature_2 != blank %}
+        <div class="ament-feature-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#00A657" stroke-width="1.33333"/></svg>
+          {{ section.settings.feature_2 }}
+        </div>
+      {% endif %}
+      {% if section.settings.feature_3 != blank %}
+        <div class="ament-feature-item">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M13.3332 4L5.99984 11.3333L2.6665 8" stroke="#00A657" stroke-width="1.33333"/></svg>
+          {{ section.settings.feature_3 }}
+        </div>
+      {% endif %}
+    </div>
+
+    <a href="{{ section.settings.button_link }}" class="ament-btn-gradient">{{ section.settings.button_text }}</a>
+
+    <div class="ament-doctor-profile">
+      {% if section.settings.doc_image != blank %}
+        <div class="ament-doc-avatar">{{ section.settings.doc_image | image_url: width: 100 | image_tag }}</div>
+      {% endif %}
+      <div class="ament-doc-info">
+        <strong>{{ section.settings.doc_name }}</strong>
+        <span>{{ section.settings.doc_credentials }}</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="ament-trust-bar-{{ section.id }}">
+    {% for block in section.blocks %}
+      <div class="ament-trust-item" {{ block.shopify_attributes }}>
+        <div class="ament-trust-icon-box">
+          {% if block.settings.trust_icon != blank %}
+            {{ block.settings.trust_icon | image_url: width: 40 | image_tag }}
+          {% else %}
+             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#2fb38e" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          {% endif %}
+        </div>
+        <div class="ament-trust-text">
+          <b>{{ block.settings.title }}</b>
+          <span>{{ block.settings.sub_title }}</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Assessment Dynamic",
+  "settings": [
+    { "type": "header", "content": "Section Padding" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Top Padding", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 5, "unit": "px", "label": "Bottom Padding", "default": 60 },
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#f8f9fa" },
+    { "type": "header", "content": "Content Settings" },
+    { "type": "text", "id": "sub_heading", "label": "Sub Heading", "default": "NOT SURE WHERE TO START?" },
+    { "type": "textarea", "id": "main_heading", "label": "Main Heading", "default": "Take the 60-Second Foot Pain Assessment" },
+    { "type": "textarea", "id": "description", "label": "Description", "default": "Answer 7 questions designed by Dr. Wachtel." },
+    { "type": "text", "id": "feature_1", "label": "Feature 1", "default": "Designed by a Board-Certified DPM" },
+    { "type": "text", "id": "feature_2", "label": "Feature 2", "default": "Takes 60 seconds" },
+    { "type": "text", "id": "feature_3", "label": "Feature 3", "default": "Free personalised results" },
+    { "type": "text", "id": "button_text", "label": "Button Text", "default": "Start My Assessment" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "image_picker", "id": "doc_image", "label": "Doctor Image" },
+    { "type": "text", "id": "doc_name", "label": "Doctor Name", "default": "Dr. Mitchell Wachtel, DPM" },
+    { "type": "text", "id": "doc_credentials", "label": "Credentials", "default": "Board-Certified Podiatrist" }
+  ],
+  "blocks": [
+    {
+      "type": "trust_item",
+      "name": "Trust Item",
+      "settings": [
+        { "type": "image_picker", "id": "trust_icon", "label": "Custom Icon (SVG/PNG)" },
+        { "type": "text", "id": "title", "label": "Title", "default": "90-Day Guarantee" },
+        { "type": "text", "id": "sub_title", "label": "Sub Title", "default": "Full refund if not satisfied" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Assessment Dynamic",
+      "blocks": [
+        { "type": "trust_item", "settings": { "title": "90-Day Guarantee" } },
+        { "type": "trust_item", "settings": { "title": "Free Shipping" } },
+        { "type": "trust_item", "settings": { "title": "Podiatrist Designed" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
