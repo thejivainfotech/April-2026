@@ -1,0 +1,280 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+<style>
+  .mit-doctor-note-section-{{ section.id }} {
+    background-color: {{ section.settings.bg_color }};
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    position: relative;
+    overflow: hidden;
+    color: #ffffff;
+  }
+
+  .mit-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    position: relative;
+    z-index: 2;
+  }
+
+ .mit-watermark {
+    position: absolute;
+    bottom: -10px;
+    right: -55px;
+    font-size: 160px;
+    font-weight: 800;
+    color: #FFFFFF04;
+    line-height: 0.8;
+    pointer-events: none;
+    z-index: 1;
+    text-transform: uppercase;
+    letter-spacing: -5px;
+}
+
+  .mit-image-wrapper {
+    flex: 0.3;
+    border: 2px solid #00AEEC1F;
+    padding: 10px;
+    border-radius: 32px;
+  }
+  .mit-image-wrapper img {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 24px;
+    display: block;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  .mit-content {
+    flex: 1;
+  }
+
+  .mit-subtitle {
+    font-size: 11px;
+    letter-spacing: 1.96px;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: #FFFFFF;
+  }
+
+  .mit-quote-box {
+    border-left: 3px solid #E8EDF2;
+    padding-left: 25px;
+    margin-bottom: 15px;
+  }
+
+  .mit-quote-text {
+    font-size: 28px;
+    line-height: 40.6px;
+    font-style: italic;
+    font-weight: 500;
+    margin-bottom: 5px;
+    color: #E8EDF2;
+  }
+
+  .mit-author {
+    font-size: 14px;
+    font-weight: 700;
+    color: #E8EDF2;
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  .mit-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 25px;
+  }
+
+  .mit-badge {
+    border: 1px solid #00A65726;
+    padding: 5px 12px;
+    border-radius: 30px;
+    font-size: 10px;
+    color: #00A657;
+    letter-spacing: 0.83px;
+    text-transform: uppercase;
+    background: #00A6571A;
+  }
+
+  .mit-cta-button {
+    display: inline-block;
+    background: linear-gradient(90deg, #00A657, #00AEEC);
+    color: #ffffff;
+    padding: 16px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.14px;
+    margin-bottom: 30px;
+    transition: transform 0.3s ease;
+    box-shadow: 0px 2px 12px #00A6574D;
+  }
+
+  .mit-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px 25px;
+  }
+
+  .mit-feature-item {
+    font-size: 13px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  @media (max-width: 990px) {
+    .mit-container { flex-direction: column; gap: 30px; align-items: flex-start; }
+    .mit-quote-box {
+    border-left: 3px solid #E8EDF2;
+    padding-left: 25px;
+    margin-bottom: 15px;
+  }
+  .mit-subtitle {
+    color: #7A90A8;
+  }
+  .mit-quote-text {
+    font-size: 19px;
+    line-height: 27.84px;
+  }
+  .mit-feature-item {
+    font-size: 12px;
+    color: #7A90A8;
+  }
+  .mit-watermark {
+    display: none;
+  }
+    .mit-features-grid { grid-template-columns: 1fr; text-align: left; max-width: 400px; margin: 0 auto; }
+    .mit-image-wrapper img { margin: 0 auto; max-width: 200px; }
+  }
+</style>
+
+<section class="mit-doctor-note-section-{{ section.id }}">
+  {% if section.settings.watermark_text != blank %}
+    <div class="mit-watermark">{{ section.settings.watermark_text }}</div>
+  {% endif %}
+
+  <div class="mit-container">
+    <div class="mit-image-wrapper">
+      {% if section.settings.doctor_image != blank %}
+        <img src="{{ section.settings.doctor_image | img_url: '640x' }}" 
+             loading="lazy"
+             alt="{{ section.settings.author_name }}">
+      {% else %}
+        {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+      {% endif %}
+    </div>
+
+    <div class="mit-content">
+      <p class="mit-subtitle">{{ section.settings.subtitle }}</p>
+      
+      <div class="mit-quote-box">
+        <div class="mit-quote-text">{{ section.settings.quote_text }}</div>
+    </div>
+    <span class="mit-author">— {{ section.settings.author_name }}</span>
+
+      <div class="mit-badges">
+        {% for block in section.blocks %}
+          {% if block.type == 'badge' %}
+            <span class="mit-badge" {{ block.shopify_attributes }}>{{ block.settings.badge_text }}</span>
+          {% endif %}
+        {% endfor %}
+      </div>
+
+      {% if section.settings.btn_text != blank %}
+        <a href="{{ section.settings.btn_link }}" class="mit-cta-button">
+          {{ section.settings.btn_text }}
+        </a>
+      {% endif %}
+
+      <div class="mit-features-grid">
+        {% for block in section.blocks %}
+          {% if block.type == 'feature' %}
+            <div class="mit-feature-item" {{ block.shopify_attributes }}>
+              <span class="mit-feature-icon">
+                <svg width="11" height="8" viewBox="0 0 11 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9.74544 0.412109L3.32878 6.82878L0.412109 3.91211" stroke="#00AEEC" stroke-width="1.16667"/>
+                </svg>
+              </span>
+              {{ block.settings.feature_text }}
+            </div>
+          {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "MIT Doctor Note",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#0e4396" },
+    { "type": "image_picker", "id": "doctor_image", "label": "Doctor Image" },
+    { "type": "text", "id": "subtitle", "label": "Subtitle", "default": "A NOTE FROM YOUR PODIATRIST" },
+    { "type": "richtext", "id": "quote_text", "label": "Quote Text", "default": "<p>I've been treating foot pain for 25 years. I've seen what works and what doesn't.</p>" },
+    { "type": "text", "id": "author_name", "label": "Author Name", "default": "Dr. Mitchell Wachtel, DPM" },
+    { "type": "text", "id": "btn_text", "label": "Button Text", "default": "Get Your Kit — $299.99" },
+    { "type": "url", "id": "btn_link", "label": "Button Link" },
+    { "type": "header", "content": "Watermark Settings" },
+    { "type": "text", "id": "watermark_text", "label": "Watermark Text", "default": "DPN" },
+    { "type": "header", "content": "Spacing" },
+    { 
+      "type": "range", 
+      "id": "padding_top", 
+      "min": 0, 
+      "max": 100, 
+      "step": 4, 
+      "default": 80, 
+      "unit": "px", 
+      "label": "Padding Top" 
+    },
+    { 
+      "type": "range", 
+      "id": "padding_bottom", 
+      "min": 0, 
+      "max": 100, 
+      "step": 4, 
+      "default": 80, 
+      "unit": "px", 
+      "label": "Padding Bottom" 
+    }
+  ],
+  "blocks": [
+    {
+      "type": "badge",
+      "name": "Badge",
+      "settings": [
+        { "type": "text", "id": "badge_text", "label": "Badge Text", "default": "Board-Certified DPM" }
+      ]
+    },
+    {
+      "type": "feature",
+      "name": "Feature Point",
+      "settings": [
+        { "type": "text", "id": "feature_text", "label": "Feature Text", "default": "Free adjustments until perfect" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "MIT Doctor Note",
+      "blocks": [
+        { "type": "badge", "settings": { "badge_text": "Board-Certified DPM" } },
+        { "type": "badge", "settings": { "badge_text": "25+ Years Clinical" } },
+        { "type": "feature", "settings": { "feature_text": "Reviews every impression" } },
+        { "type": "feature", "settings": { "feature_text": "Same exact protocol" } }
+      ]
+    }
+  ]
+}
+{% endschema %}
