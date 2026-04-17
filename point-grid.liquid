@@ -1,0 +1,357 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+  }
+
+  @media screen and (min-width: 750px) {
+    .section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .pain-point-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .pain-header {
+    text-align: center;
+    margin-bottom: 50px;
+  }
+
+  .pain-header span {
+    color: #D63031;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 1.96px;
+    display: block;
+    margin-bottom: 10px;
+  }
+
+ .pain-header h2 {
+    font-size: 56px;
+    font-weight: 800;
+    margin: 20px auto;
+    color: #01203F;
+    line-height: 62px;
+    max-width: 710px;
+}
+
+  .pain-header p {
+    max-width: 685px;
+    margin: 0 auto;
+    color: #3A4554;
+    font-size: 16px;
+    line-height: 28px;
+  }
+
+  .pain-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: 60px;
+    margin-bottom: 50px;
+  }
+
+  .pain-card {
+    background: #FAFAF8;
+    border: 1px solid #D8DCE2;
+    border-radius: 20px;
+    padding: 25px 25px;
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .icon-x {
+    min-width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  /* Text in one line setting */
+  .pain-card-content {
+    line-height: 1.5;
+  }
+
+  .pain-card-content h3 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+    color: #01203F;
+    display: inline; 
+  }
+
+  .pain-card-content p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 21px;
+    color: #3A4554;
+    display: inline;
+  }
+
+  /* Adding space between title and text */
+  .pain-card-content h3::after {
+    content: " ";
+    display: inline;
+  }
+
+  /* Bottom Feature (Image & Stat Box) */
+  .pain-bottom-content {
+    display: grid;
+    grid-template-columns: 40% 60%;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .pain-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 24px;
+    display: block;
+  }
+
+.stat-box {
+    color: white;
+    padding: 20px;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: fit-content;
+}
+
+  .stat-number-wrapper {
+    font-size: 44px;
+    font-weight: 800;
+    line-height: 44px;
+    color: #E8EDF2;
+    margin-bottom: 5px;
+    display: flex;
+    align-items: baseline;
+  }
+
+  .stat-percent {
+    color: #00c2cb;
+    font-size: 45px;
+    margin-left: 5px;
+  }
+
+  .stat-description {
+    font-size: 13px;
+    line-height: 20px;
+    color: #7A90A8;
+    margin: 0;
+    max-width: 510px;
+}
+
+  .stat-author {
+    margin-top: 5px;
+    font-size: 11px;
+    line-height: 17px;
+    color: #7A90A8;
+  }
+
+  @media (max-width: 990px) {
+    .pain-grid, .pain-bottom-content {
+      grid-template-columns: 1fr;
+    }
+    .pain-header h2 {
+        font-size: 32px;
+        line-height: 35px;
+    }
+    .stat-box { padding: 40px 30px; }
+  }
+{%- endstyle -%}
+
+<div class="section-{{ section.id }}-padding">
+  <div class="pain-point-container">
+    
+    <div class="pain-header">
+      {%- if section.settings.sub_heading != blank -%}
+        <span>{{ section.settings.sub_heading }}</span>
+      {%- endif -%}
+      <h2>{{ section.settings.main_heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+
+    <div class="pain-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'pain_card' -%}
+          <div class="pain-card" {{ block.shopify_attributes }}>
+            <div class="icon-x">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="10" fill="#FF4136" fill-opacity="0.06"/>
+                <path d="M20 12L12 20" stroke="#D63031" stroke-width="1.33333"/>
+                <path d="M12 12L20 20" stroke="#D63031" stroke-width="1.33333"/>
+                </svg>
+            </div>
+            <div class="pain-card-content">
+              <h3>{{ block.settings.title }}</h3>
+              <p>{{ block.settings.text }}</p>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+
+    <div class="pain-bottom-content">
+      <div class="pain-image-wrapper">
+        {%- if section.settings.comparison_image != blank -%}
+          {{ section.settings.comparison_image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+      
+      <div class="stat-box" style="background-color: {{ section.settings.stat_bg_color }};">
+        <div class="stat-number-wrapper">
+          {{ section.settings.stat_number }}<span class="stat-percent">%</span>
+        </div>
+        <p class="stat-description">{{ section.settings.stat_text }}</p>
+        
+        {%- if section.settings.stat_author != blank -%}
+          <div class="stat-author">
+            &mdash; {{ section.settings.stat_author }}
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Pain Point Grid",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Section Background",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "sub_heading",
+      "label": "Red Sub-heading",
+      "default": "HERE'S WHY YOU'RE STILL IN PAIN"
+    },
+    {
+      "type": "textarea",
+      "id": "main_heading",
+      "label": "Main Heading",
+      "default": "You Keep Buying Insoles. They Keep Failing You."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description Paragraph",
+      "default": "You know the pattern. New insoles feel great for two weeks."
+    },
+    {
+      "type": "header",
+      "content": "Bottom Stat Section"
+    },
+    {
+      "type": "image_picker",
+      "id": "comparison_image",
+      "label": "Comparison Image"
+    },
+    {
+      "type": "color",
+      "id": "stat_bg_color",
+      "label": "Stat Box Background",
+      "default": "#001d3d"
+    },
+    {
+      "type": "text",
+      "id": "stat_number",
+      "label": "Stat Number (Digits only)",
+      "default": "72"
+    },
+    {
+      "type": "textarea",
+      "id": "stat_text",
+      "label": "Stat Description",
+      "default": "of patients who walk into Dr. Wachtel's office have already wasted money on 3 or more products that didn't work."
+    },
+    {
+      "type": "text",
+      "id": "stat_author",
+      "label": "Author/Source Credit",
+      "default": "Dr. Wachtel's clinical intake records"
+    },
+    {
+      "type": "header",
+      "content": "Spacing"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 80
+    }
+  ],
+  "blocks": [
+    {
+      "type": "pain_card",
+      "name": "Pain Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Card Title (Bold)",
+          "default": "Foam can't hold your arch."
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Card Text (Normal)",
+          "default": "Every drugstore insole is designed to compress — that's what foam does under body weight."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Pain Point Grid",
+      "blocks": [
+        { "type": "pain_card" },
+        { "type": "pain_card" },
+        { "type": "pain_card" },
+        { "type": "pain_card" }
+      ]
+    }
+  ]
+}
+{% endschema %}
