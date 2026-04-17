@@ -1,0 +1,245 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .tls-timeline-{{ section.id }} {
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+    background-color: {{ section.settings.bg_color }};
+    overflow: hidden; /* Prevent horizontal scroll on body */
+  }
+  .tls-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+  }
+  .tls-header h2 { 
+    margin-bottom: 10px; 
+    font-size: 20px; 
+    font-weight: 800; 
+    color: {{ section.settings.text_color }};
+  }
+  .tls-header p { 
+    font-size: 14px;
+    margin-bottom: 45px; 
+    color: #6A7585; 
+    padding: 0 15px;
+  }
+
+  .tls-wrapper {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    flex-wrap: nowrap;
+    /* Custom Scroll for Mobile */
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 20px;
+    scrollbar-width: none; /* Firefox */
+  }
+  .tls-wrapper::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  /* Connecting Line */
+  .tls-wrapper::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 65px;
+    width: 100%; /* Fixed width for line to span across all scrollable items */
+    min-width: 800px; /* Ensures line stays straight on mobile scroll */
+    height: 2px;
+    background: #D8DCE2;
+    z-index: 1;
+  }
+
+  .tls-step {
+    flex: 0 0 160px; /* Fixed width for mobile items to enable scrolling */
+    position: relative;
+    z-index: 2;
+    padding: 0 10px;
+  }
+
+  /* Desktop adjust for flex-growth */
+  @media (min-width: 769px) {
+    .tls-step {
+      flex: 1;
+    }
+    .tls-wrapper::before {
+      left: 8%;
+      right: 5%;
+      width: 85%;
+      min-width: auto;
+    }
+    .tls-wrapper {
+      overflow-x: visible;
+    }
+  }
+
+  .tls-visual {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 15px;
+    font-weight: bold;
+    font-size: 18px;
+    transition: transform 0.3s ease;
+  }
+  .tls-visual svg {
+    width: 38px;
+    height: 38px;
+    fill: currentColor;
+  }
+  .tls-title { 
+    font-weight: 700; 
+    margin-bottom: 5px; 
+    font-size: 11px; 
+    color: #01203F;
+  }
+ .tls-desc {
+    font-size: 10px;
+    line-height: 12.9px;
+    color: #6A7585;
+    word-wrap: break-word;
+    max-width: 85px;
+    margin-inline: auto;
+}
+  @media (min-width: 769px) { 
+    .tls-header h2 {
+        font-size: 16px;
+        color: #01203F;
+    }
+  }
+{%- endstyle -%}
+
+<section class="tls-timeline-{{ section.id }}">
+  <div class="tls-container">
+    <div class="tls-header">
+      <h2>{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.subheading }}</p>
+    </div>
+
+    <div class="tls-wrapper">
+      {%- for block in section.blocks -%}
+        <div class="tls-step" {{ block.shopify_attributes }}>
+          <div class="tls-visual" style="background-color: {{ block.settings.step_color }};">
+            {%- if block.settings.use_svg and block.settings.svg_code != blank -%}
+              {{ block.settings.svg_code }}
+            {%- else -%}
+              {{ forloop.index }}
+            {%- endif -%}
+          </div>
+          <div class="tls-content">
+            <div class="tls-title">{{ block.settings.title }}</div>
+            <div class="tls-desc">{{ block.settings.description }}</div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "TLS Timeline Steps",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Your Custom Orthotic Timeline"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "From order to your doorstep — here’s exactly what to expect."
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#f1f1f1"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#121212"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 60
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Step Title",
+          "default": "Order"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Step Description",
+          "default": "Kit ships within 3 days"
+        },
+        {
+          "type": "color",
+          "id": "step_color",
+          "label": "Step Circle Color",
+          "default": "#00ab66"
+        },
+        {
+          "type": "checkbox",
+          "id": "use_svg",
+          "label": "Use SVG instead of Number",
+          "default": false
+        },
+        {
+          "type": "textarea",
+          "id": "svg_code",
+          "label": "SVG Code"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "TLS Custom Timeline",
+      "blocks": [
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" },
+        { "type": "step" }
+      ]
+    }
+  ]
+}
+{% endschema %}
