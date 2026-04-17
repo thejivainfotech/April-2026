@@ -1,0 +1,285 @@
+===== Horizon theme mein use kiya gya store:- https://rundocwellness.com/ ==========
+
+{%- style -%}
+  .split-section-{{ section.id }}-padding {
+    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
+    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
+    background-color: {{ section.settings.bg_color }};
+    color: {{ section.settings.text_color }};
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Watermark Styling */
+  .split-ortho-watermark {
+    position: absolute;
+    top: 20%;
+    right: -20%;
+    transform: translateY(-50%);
+    font-size: 222px;
+    font-weight: 900;
+    color: #FFFFFF03;
+    pointer-events: none;
+    line-height: 1;
+    z-index: 0;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  @media screen and (min-width: 750px) {
+    .split-section-{{ section.id }}-padding {
+      padding-top: {{ section.settings.padding_top }}px;
+      padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+  }
+
+  .split-ortho-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  .split-ortho-image-side {
+    flex: 1;
+    position: relative;
+    min-width: 300px;
+  }
+
+  .split-ortho-image-side img {
+    width: 100%;
+    height: auto;
+    border-radius: 30px;
+    display: block;
+  }
+
+  .split-price-badge {
+    position: absolute;
+    bottom: 40px;
+    right: 35px;
+    background: linear-gradient(135deg, #00A657 0%, #00AEEC 100%);
+    box-shadow: 0px 8px 32px 0px rgba(0, 166, 87, 0.3);
+    color: #FFFFFF;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 40px;
+  }
+
+  .split-ortho-content-side {
+    flex: 1.2;
+    min-width: 300px;
+  }
+
+  .split-ortho-subheading {
+    text-transform: uppercase;
+    letter-spacing: 1.96px;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 18px;
+    color: #DBE64C;
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .split-ortho-title {
+    font-size: 56px;
+    line-height: 62px;
+    margin: 0 0 1.5rem 0;
+    font-weight: 800;
+    color: #E8EDF2;
+  }
+
+  .split-ortho-desc {
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 28px;
+    color: #7A90A8;
+    margin-bottom: 30px;
+    max-width: 530px;
+  }
+
+  .split-ortho-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 35px 0;
+  }
+
+  .split-ortho-list-item {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 1.2rem;
+    align-items: flex-start;
+  }
+
+  .split-ortho-list-text {
+    font-size: 14px;
+    line-height: 22px;
+    color: #7A90A8;
+  }
+
+  .split-ortho-list-text strong {
+    color: #E8EDF2;
+  }
+
+  .split-ortho-btn {
+    display: inline-block;
+    padding: 15px 38px;
+    border: 1px solid #FFFFFF33;
+    border-radius: 60px;
+    color: #E8EDF2;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  .split-ortho-trust {
+    margin-top: 35px;
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .split-trust-text b { display: block; font-size: 13px; line-height: 18px; color: #E8EDF2; font-weight: 500; }
+  .split-trust-text span { font-size: 11px; line-height: 15px; opacity: 0.6; color: #7A90A8; }
+
+  @media (max-width: 767px) {
+    .split-ortho-container { gap: 10px; padding-inline: 20px;}
+    .split-ortho-title { font-size: 32px; line-height: 35px; color: #E8EDF2; }
+    .split-price-badge { font-size: 1.1rem; padding: 8px 16px; bottom: 25px;}
+    .split-ortho-watermark { font-size: 40vw; top: 20%; right: -20%; }
+    .split-ortho-list-item { display: grid; grid-template-columns: 1fr 8fr; gap: 10px;}
+  }
+{%- endstyle -%}
+
+<div class="split-section-{{ section.id }}-padding">
+  {%- if section.settings.watermark_text != blank -%}
+    <div class="split-ortho-watermark">{{ section.settings.watermark_text }}</div>
+  {%- endif -%}
+
+  <div class="split-ortho-container">
+    <div class="split-ortho-image-side">
+      {%- if section.settings.image != blank -%}
+        {{ section.settings.image | image_url: width: 1000 | image_tag: loading: 'lazy' }}
+      {%- else -%}
+        {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+      {%- endif -%}
+      
+      {%- if section.settings.price != blank -%}
+        <div class="split-price-badge">{{ section.settings.price }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="split-ortho-content-side">
+      <span class="split-ortho-subheading">{{ section.settings.subheading }}</span>
+      <h2 class="split-ortho-title">{{ section.settings.title }}</h2>
+      <div class="split-ortho-desc">{{ section.settings.description }}</div>
+
+      <div class="split-ortho-list">
+        {%- for block in section.blocks -%}
+          {%- if block.type == 'list_item' -%}
+            <div class="split-ortho-list-item" {{ block.shopify_attributes }}>
+              <div class="split-ortho-number">
+                {%- if block.settings.icon_svg != blank -%}
+                  {{ block.settings.icon_svg }}
+                {%- else -%}
+                  {{ forloop.index }}
+                {%- endif -%}
+              </div>
+              <div class="split-ortho-list-text">
+                <strong>{{ block.settings.bold_text }}</strong> {{ block.settings.regular_text }}
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+
+      {%- if section.settings.button_label != blank -%}
+        <a href="{{ section.settings.button_link }}" class="split-ortho-btn">
+          {{ section.settings.button_label }}
+        </a>
+      {%- endif -%}
+
+      <div class="split-ortho-trust">
+        <div class="split-trust-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g filter="url(#filter0_d_23_22337)">
+            <rect x="20" y="20" width="40" height="40" rx="20" fill="url(#paint0_linear_23_22337)" shape-rendering="crispEdges"/>
+            <path d="M40 47.5C40 47.5 46 44.5 46 40V34.75L40 32.5L34 34.75V40C34 44.5 40 47.5 40 47.5Z" stroke="white" stroke-width="1.5"/>
+            </g>
+            <defs>
+            <filter id="filter0_d_23_22337" x="0" y="0" width="80" height="80" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+            <feFlood flood-opacity="0" result="BackgroundImageFix"/>
+            <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+            <feOffset/>
+            <feGaussianBlur stdDeviation="10"/>
+            <feComposite in2="hardAlpha" operator="out"/>
+            <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0.65098 0 0 0 0 0.341176 0 0 0 0.2 0"/>
+            <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_23_22337"/>
+            <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_23_22337" result="shape"/>
+            </filter>
+            <linearGradient id="paint0_linear_23_22337" x1="20" y1="20" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+            <stop stop-color="#00A657"/>
+            <stop offset="1" stop-color="#00AEEC"/>
+            </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <div class="split-trust-text">
+          <b>{{ section.settings.trust_title }}</b>
+          <span>{{ section.settings.trust_sub }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Custom Orthotics Hero",
+  "settings": [
+    { "type": "color", "id": "bg_color", "label": "Background Color", "default": "#001b33" },
+    { "type": "color", "id": "text_color", "label": "Text Color", "default": "#ffffff" },
+    { "type": "text", "id": "watermark_text", "label": "Background Watermark Text", "default": "CUSTOM" },
+    { "type": "image_picker", "id": "image", "label": "Main Image" },
+    { "type": "text", "id": "price", "label": "Price Tag", "default": "$299" },
+    { "type": "text", "id": "subheading", "label": "Subheading", "default": "PREMIUM • CUSTOM-BUILT" },
+    { "type": "text", "id": "title", "label": "Heading", "default": "When Off-the-Shelf Isn't Enough" },
+    { "type": "richtext", "id": "description", "label": "Description" },
+    { "type": "text", "id": "button_label", "label": "Button Label", "default": "Learn More About Custom Orthotics" },
+    { "type": "url", "id": "button_link", "label": "Button Link" },
+    { "type": "text", "id": "trust_title", "label": "Trust Title", "default": "180-Day Satisfaction Guarantee" },
+    { "type": "text", "id": "trust_sub", "label": "Trust Subtext", "default": "Free fit adjustments if needed." },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Top Padding", "default": 60 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 100, "step": 4, "unit": "px", "label": "Bottom Padding", "default": 60 }
+  ],
+  "blocks": [
+    {
+      "type": "list_item",
+      "name": "List Item",
+      "settings": [
+        { "type": "textarea", "id": "icon_svg", "label": "SVG Icon Code", "info": "Paste SVG code here. Leave blank to show numbers." },
+        { "type": "text", "id": "bold_text", "label": "Bold Text" },
+        { "type": "textarea", "id": "regular_text", "label": "Regular Text" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Orthotics Hero",
+      "blocks": [
+        { "type": "list_item", "settings": { "bold_text": "Order your kit.", "regular_text": "We ship the boxes to your door." } },
+        { "type": "list_item", "settings": { "bold_text": "Step on foam.", "regular_text": "30 seconds. No special tools." } }
+      ]
+    }
+  ]
+}
+{% endschema %}
